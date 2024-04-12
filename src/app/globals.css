@@ -3,6 +3,31 @@
 @tailwind utilities;
 
 :root {
+  --primary-font: 'SpaceMono Nerd Font';
+  --color-font: #f5f9ff;
+  --hover-color-font: #919796;
+  --bg-color: #242424;
+  --bg-color-dark: #1a1a1a;
+  --primary-color: #0074d2;
+  --primary-color-dark: #4d5ec7;
+  --secondary-color: #009a77;
+
+  color-scheme: light dark;
+  
+  /* font-family: --primary-font;
+  font-weight: 400;
+  font-style: normal;
+
+  color: --color-font;
+  background-color: --bg-color;
+
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; */
+}
+
+:root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -18,12 +43,13 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
+  background-color: var(--bg-color);
 }
 
 @layer utilities {

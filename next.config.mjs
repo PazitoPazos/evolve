@@ -1,4 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      // Excluir el módulo ssh2 del empaquetado en el lado del servidor
+      config.externals.push('ssh2')
+    }
 
-export default nextConfig;
+    return config
+  },
+}
+
+export default nextConfig
