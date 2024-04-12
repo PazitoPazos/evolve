@@ -2,6 +2,7 @@
 import ServerDetails from '@/components/ServerDetails'
 import StartStop from '@/components/StartStop'
 import { useWebSocket, WebSocketProvider } from '@/contexts/WebSocketContext'
+import { blobToText } from '@/utils/blobToText'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Dashboard() {
@@ -24,6 +25,27 @@ export default function Dashboard() {
   const circleRef = useRef<SVGCircleElement>(null)
 
   const { ws } = useWebSocket()
+
+  useEffect(() => {
+    if (!ws) return
+
+    const handleMessage = (event: MessageEvent) => {
+      blobToText(event.data).then((text) => {
+        console.log(text)
+        if (text.includes('Timings Reset')) {
+          
+        } else if (text.includes('Closing Server')) {
+          
+        }
+      })
+    }
+
+    ws.onmessage = handleMessage
+
+    return () => {
+      ws.onmessage = null
+    }
+  }, [ws])
 
   useEffect(() => {
     const intervalPercentage = setInterval(() => {

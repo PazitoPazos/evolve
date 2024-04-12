@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { spaceMono } from '@/fonts/fonts'
 import Navbar from '@/components/Navbar'
-import { useWebSocket, WebSocketProvider } from '@/contexts/WebSocketContext'
+import { WebSocketProvider } from '@/contexts/WebSocketContext'
 
 export const metadata: Metadata = {
   title: 'Project SMWA',
@@ -22,9 +22,9 @@ export default function RootLayout({
           spaceMono.className
         }
       >
-        {/* <WebSocketProvider> */}
-        <Navbar />
-        {/* </WebSocketProvider> */}
+        <WebSocketProvider>
+          <Navbar />
+        </WebSocketProvider>
         {children}
       </body>
     </html>

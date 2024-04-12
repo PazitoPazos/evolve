@@ -11,40 +11,41 @@ interface StartStopProps {
 
 function StartStop({ status }: StartStopProps) {
   const [serverStatus, setServerStatus] = useState(status)
-
-  // const { ws } = useWebSocket()
-  const ws = new WebSocket('ws://localhost:4000')
+  const { ws } = useWebSocket()
 
   useEffect(() => {
-    // Escucha mensajes del servidor
-    if (ws) {
-      ws.onmessage = (event) => {
-        blobToText(event.data)
-          .then((text) => {
-            console.log(text)
-            if (text.includes('Timings Reset')) {
-              setServerStatus('running')
-            } else if (text.includes('Closing Server')) {
-              setServerStatus('offline')
-            }
-          })
-          .catch((error) => {
-            console.error('Error al convertir el blob a texto:', error)
-          })
-      }
-    } else {
-      console.error('La conexión WebSocket es nula')
+    if (!ws) return
+
+    const handleMessage = (event: MessageEvent) => {
+      blobToText(event.data).then((text) => {
+        console.log(text)
+        if (text.includes('Timings Reset')) {
+          setServerStatus('running')
+        } else if (text.includes('Closing Server')) {
+          setServerStatus('offline')
+        }
+      })
+    }
+
+    ws.onmessage = handleMessage
+
+    return () => {
+      ws.onmessage = null
     }
   }, [ws])
 
   function handleClickStart() {
-    ws.send('start')
-    setServerStatus('loading')
+    if (ws) {
+      ws.send('start')
+      setServerStatus('loading')
+    }
   }
 
   function handleClickStop() {
-    ws.send('stop')
-    setServerStatus('loading')
+    if (ws) {
+      ws.send('stop')
+      setServerStatus('loading')
+    }
   }
 
   return (

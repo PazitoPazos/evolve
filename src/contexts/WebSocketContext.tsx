@@ -18,11 +18,26 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
 
   useEffect(() => {
     const newWs = new WebSocket('ws://localhost:4000')
-    setWs(newWs)
 
-    // return () => {
-    //   newWs.close()
-    // }
+    newWs.onopen = () => {
+      console.log('Evolve API conectada')
+      setWs(newWs)
+    }
+
+    newWs.onclose = () => {
+      console.log('Evolve API cerrada')
+    }
+
+    newWs.onerror = (error) => {
+      // Manejar errores de conexión
+      console.error('Error en la conexión con Evolve API:', error)
+    }
+
+    return () => {
+      if (newWs.readyState === WebSocket.OPEN) {
+        newWs.close()
+      }
+    }
   }, [])
 
   return (
