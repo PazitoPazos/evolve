@@ -3,6 +3,7 @@ import './globals.css'
 import { spaceMono } from '@/fonts/fonts'
 import Navbar from '@/components/Navbar'
 import { WebSocketProvider } from '@/contexts/WebSocketContext'
+import { WebSocketDataProvider } from '@/contexts/WebSocketDataContext'
 
 export const metadata: Metadata = {
   title: 'Project SMWA',
@@ -23,8 +24,10 @@ export default function RootLayout({
         }
       >
         <WebSocketProvider>
-          <Navbar />
-          {children}
+          <WebSocketDataProvider>
+            <Navbar />
+            {children}
+          </WebSocketDataProvider>
         </WebSocketProvider>
       </body>
     </html>

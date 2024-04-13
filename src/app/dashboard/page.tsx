@@ -1,11 +1,11 @@
 'use client'
 import ServerDetails from '@/components/ServerDetails'
 import StartStop from '@/components/StartStop'
-import { useWebSocket } from '@/contexts/WebSocketContext'
 import { ServerUsageDetails } from '@/types/types.d'
 import { isConsoleData, isServerUsageData } from '@/types/types'
-import { blobToJson } from '@/utils/blobToJson'
+import { getColor } from '@/utils/getColor'
 import { useEffect, useRef, useState } from 'react'
+import { useWebSocketData } from '@/contexts/WebSocketDataContext'
 
 export default function Dashboard() {
   const serverDetails = {
@@ -27,32 +27,27 @@ export default function Dashboard() {
   const [borderColor, setBorderColor] = useState<string>('')
   const circleRef = useRef<SVGCircleElement>(null)
 
-  const { ws } = useWebSocket()
+  const { webSocketData } = useWebSocketData()
 
   useEffect(() => {
-    if (!ws) return
+    if (!webSocketData) return
 
-    const handleMessage = (event: MessageEvent) => {
-      blobToJson(event.data).then((json) => {
-        console.log(json)
-
-        if (isServerUsageData(json)) {
-          const { stream, type, data } = json
-          const { cpuUsage, usedMem, totalMem } = data
-          setServerUsage(data)
-        } else if (isConsoleData(json)) {
-        } else {
-          console.error('El JSON está malito', json)
-        }
-      })
+    if (isServerUsageData(webSocketData)) {
+      const { data } = webSocketData
+      setServerUsage(data)
+    } else if (isConsoleData(webSocketData)) {
+      const { data } = webSocketData
+      if (data.includes('Closing Server')) {
+        setServerUsage(null)
+      }
+    } else {
+      console.error('No se han podido recuperar los datos', webSocketData)
     }
-
-    ws.onmessage = handleMessage
 
     return () => {
-      ws.onmessage = null
+      if (!webSocketData) setServerUsage(null)
     }
-  }, [ws])
+  }, [webSocketData])
 
   useEffect(() => {
     if (!serverUsage) return
@@ -127,7 +122,7 @@ export default function Dashboard() {
             >
               <p>
                 {serverUsage?.usedMem.toFixed(2) ?? 0}GB /{' '}
-                {serverUsage?.totalMem ?? 0}GB
+                {serverUsage?.totalMem.toFixed(0) ?? 0}GB
               </p>
             </div>
           </div>

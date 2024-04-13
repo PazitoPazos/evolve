@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import StartIcon from '../icons/StartIcon'
 import StopIcon from '../icons/StopIcon'
 import LoadingBar from './LoadingBar'
-import { blobToJson } from '@/utils/blobToJson'
-import { useWebSocket } from '@/contexts/WebSocketContext'
 import { isConsoleData, isServerUsageData } from '@/types/types'
+import { useWebSocketData } from '@/contexts/WebSocketDataContext'
 
 interface StartStopProps {
   status: string
@@ -12,46 +11,46 @@ interface StartStopProps {
 
 function StartStop({ status }: StartStopProps) {
   const [serverStatus, setServerStatus] = useState(status)
-  const { ws } = useWebSocket()
+  const { webSocketData, wsSendData } = useWebSocketData()
 
   useEffect(() => {
-    if (!ws) return
+    if (!webSocketData) return
 
-    const handleMessage = (event: MessageEvent) => {
-      blobToJson(event.data).then((json) => {
-        if (isConsoleData(json)) {
-          const { stream, type, data } = json
-          if (data.includes('Timings Reset')) {
-            setServerStatus('running')
-          } else if (data.includes('Closing Server')) {
-            setServerStatus('offline')
-          }
-        } else if (isServerUsageData(json)) {
-        } else {
-          console.error('El JSON está malito', json)
-        }
-      })
+    if (isConsoleData(webSocketData)) {
+      const { data } = webSocketData
+      if (data.includes('Timings Reset')) {
+        setServerStatus('running')
+      } else if (data.includes('Closing Server')) {
+        setServerStatus('offline')
+      }
+    } else if (isServerUsageData(webSocketData)) {
+    } else {
+      console.error('No se han podido recuperar los datos', webSocketData)
     }
-
-    ws.onmessage = handleMessage
 
     return () => {
-      ws.onmessage = null
+      if (!webSocketData) setServerStatus('offline')
     }
-  }, [ws])
+  }, [webSocketData])
 
   function handleClickStart() {
-    if (ws) {
-      ws.send('start')
-      setServerStatus('loading')
-    }
+    wsSendData({ action: 'start' }, (error) => {
+      if (error) {
+        console.error('Error al enviar los datos:', error)
+      } else {
+        setServerStatus('loading')
+      }
+    })
   }
 
   function handleClickStop() {
-    if (ws) {
-      ws.send('stop')
-      setServerStatus('loading')
-    }
+    wsSendData({ action: 'stop' }, (error) => {
+      if (error) {
+        console.error('Error al enviar los datos:', error)
+      } else {
+        setServerStatus('loading')
+      }
+    })
   }
 
   return (

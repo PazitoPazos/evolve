@@ -1,4 +1,4 @@
-function getColor(percentage: number): string {
+export function getColor(percentage: number): string {
   const green = [0, 137, 111]
   const yellow = [251, 191, 36]
   const red = [195, 74, 54]

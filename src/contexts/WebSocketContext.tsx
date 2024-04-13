@@ -1,5 +1,11 @@
 'use client'
-import { createContext, useContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 interface WebSocketContextType {
   ws: WebSocket | null
@@ -9,11 +15,9 @@ const WebSocketContext = createContext<WebSocketContextType>({ ws: null })
 
 export const useWebSocket = () => useContext(WebSocketContext)
 
-interface WebSocketProviderProps {
-  children: React.ReactNode
-}
-
-export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
+export const WebSocketProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [ws, setWs] = useState<WebSocket | null>(null)
 
   useEffect(() => {
