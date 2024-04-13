@@ -39,13 +39,11 @@ export default function Dashboard() {
       const { data } = webSocketData
       if (data.includes('Closing Server')) {
         setServerUsage(null)
+        setStrokeColor('currentColor')
+        setBorderColor('currentColor')
       }
     } else {
       console.error('No se han podido recuperar los datos', webSocketData)
-    }
-
-    return () => {
-      if (!webSocketData) setServerUsage(null)
     }
   }, [webSocketData])
 
@@ -70,7 +68,7 @@ export default function Dashboard() {
       circle.style.strokeDasharray = `${circumference}px`
       circle.style.strokeDashoffset = `${((100 - serverUsage.cpuUsage) / 100) * circumference}px`
     }
-  }, [serverUsage?.cpuUsage])
+  }, [serverUsage])
 
   return (
     <div className="max-w-7xl text-center">
