@@ -1,7 +1,7 @@
 'use client'
 import ServerDetails from '@/components/ServerDetails'
 import StartStop from '@/components/StartStop'
-import { useWebSocket, WebSocketProvider } from '@/contexts/WebSocketContext'
+import { useWebSocket } from '@/contexts/WebSocketContext'
 import { ServerUsageDetails } from '@/types/types.d'
 import { isConsoleData, isServerUsageData } from '@/types/types'
 import { blobToJson } from '@/utils/blobToJson'
@@ -23,10 +23,8 @@ export default function Dashboard() {
   const [serverUsage, setServerUsage] = useState<ServerUsageDetails | null>(
     null
   )
-  const [percentage, setPercentage] = useState<number>(0)
   const [strokeColor, setStrokeColor] = useState<string>('')
   const [borderColor, setBorderColor] = useState<string>('')
-  const [usedRam, setUsedRam] = useState<number>(0)
   const circleRef = useRef<SVGCircleElement>(null)
 
   const { ws } = useWebSocket()
@@ -59,65 +57,25 @@ export default function Dashboard() {
   useEffect(() => {
     if (!serverUsage) return
 
-    const intervalPercentage = setInterval(() => {
-      const newPercentage = serverUsage.cpuUsage
-      const newColor = getColor(newPercentage)
-      setPercentage(newPercentage)
-      setStrokeColor(newColor)
+    const intervalServerUsage = setInterval(() => {
+      const { cpuUsage, usedMem } = serverUsage
+      const newColorCpu = getColor(cpuUsage)
+      const newColorRam = getColor((usedMem / 6) * 100)
+      setStrokeColor(newColorCpu)
+      setBorderColor(newColorRam)
     }, 1000)
 
-    return () => clearInterval(intervalPercentage)
+    return () => clearInterval(intervalServerUsage)
   }, [serverUsage])
 
   useEffect(() => {
     const circle = circleRef.current
-    if (circle) {
+    if (circle && serverUsage) {
       const circumference = circle.getTotalLength()
       circle.style.strokeDasharray = `${circumference}px`
-      circle.style.strokeDashoffset = `${((100 - percentage) / 100) * circumference}px`
+      circle.style.strokeDashoffset = `${((100 - serverUsage.cpuUsage) / 100) * circumference}px`
     }
-  }, [percentage])
-
-  useEffect(() => {
-    if (!serverUsage) return
-
-    const intervalUsedRam = setInterval(() => {
-      const newRamUsage = serverUsage.usedMem
-      const newColor = getColor((newRamUsage / 6) * 100)
-      setUsedRam(newRamUsage)
-      setBorderColor(newColor)
-    }, 1000)
-
-    return () => clearInterval(intervalUsedRam)
-  }, [serverUsage])
-
-  function getColor(percentage: number): string {
-    const green = [0, 137, 111]
-    const yellow = [251, 191, 36]
-    const red = [195, 74, 54]
-
-    let color: number[]
-
-    if (percentage <= 50) {
-      color = interpolateColor(green, yellow, percentage / 50)
-    } else {
-      color = interpolateColor(yellow, red, (percentage - 50) / 50)
-    }
-
-    return `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-  }
-
-  function interpolateColor(
-    color1: number[],
-    color2: number[],
-    factor: number
-  ): number[] {
-    const result = []
-    for (let i = 0; i < 3; i++) {
-      result[i] = Math.round(color1[i] + factor * (color2[i] - color1[i]))
-    }
-    return result
-  }
+  }, [serverUsage?.cpuUsage])
 
   return (
     <div className="max-w-7xl text-center">
@@ -153,7 +111,7 @@ export default function Dashboard() {
                 fill="white"
                 fontSize={20}
               >
-                {percentage.toFixed(2)}%
+                {serverUsage?.cpuUsage.toFixed(2) ?? 0}%
               </text>
             </svg>
           </div>
@@ -164,10 +122,13 @@ export default function Dashboard() {
           </div>
           <div className="">
             <div
-              className=" border-4 border-solid p-2"
+              className="border-4 border-solid p-2 transition-all duration-700 ease-in-out"
               style={{ borderColor: borderColor }}
             >
-              <p>{usedRam.toFixed(2)}GB / 6GB</p>
+              <p>
+                {serverUsage?.usedMem.toFixed(2) ?? 0}GB /{' '}
+                {serverUsage?.totalMem ?? 0}GB
+              </p>
             </div>
           </div>
         </div>
