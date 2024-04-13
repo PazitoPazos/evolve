@@ -23,8 +23,8 @@ export default function Dashboard() {
   const [serverUsage, setServerUsage] = useState<ServerUsageDetails | null>(
     null
   )
-  const [strokeColor, setStrokeColor] = useState<string>('')
-  const [borderColor, setBorderColor] = useState<string>('')
+  const [strokeColor, setStrokeColor] = useState<string>('currentColor')
+  const [borderColor, setBorderColor] = useState<string>('currentColor')
   const circleRef = useRef<SVGCircleElement>(null)
 
   const { webSocketData } = useWebSocketData()
