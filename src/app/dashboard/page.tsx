@@ -3,9 +3,9 @@ import ServerDetails from '@/components/ServerDetails'
 import StartStop from '@/components/StartStop'
 import { ServerUsageDetails } from '@/types/types.d'
 import { isConsoleData, isServerUsageData } from '@/types/types'
-import { getColor } from '@/utils/getColor'
 import { useEffect, useRef, useState } from 'react'
 import { useWebSocketData } from '@/contexts/WebSocketDataContext'
+import { updateColorsAndStroke } from '@/utils/updateColorsAndStroke'
 
 export default function Dashboard() {
   const serverDetails = {
@@ -29,6 +29,7 @@ export default function Dashboard() {
 
   const { webSocketData } = useWebSocketData()
 
+  // TODO: Colors doesn't reset when close server
   useEffect(() => {
     if (!webSocketData) return
 
@@ -51,23 +52,16 @@ export default function Dashboard() {
     if (!serverUsage) return
 
     const intervalServerUsage = setInterval(() => {
-      const { cpuUsage, usedMem } = serverUsage
-      const newColorCpu = getColor(cpuUsage)
-      const newColorRam = getColor((usedMem / 6) * 100)
-      setStrokeColor(newColorCpu)
-      setBorderColor(newColorRam)
+      const { strokeColor, borderColor } = updateColorsAndStroke(
+        serverUsage,
+        circleRef
+      )
+
+      setStrokeColor(strokeColor)
+      setBorderColor(borderColor)
     }, 1000)
 
     return () => clearInterval(intervalServerUsage)
-  }, [serverUsage])
-
-  useEffect(() => {
-    const circle = circleRef.current
-    if (circle && serverUsage) {
-      const circumference = circle.getTotalLength()
-      circle.style.strokeDasharray = `${circumference}px`
-      circle.style.strokeDashoffset = `${((100 - serverUsage.cpuUsage) / 100) * circumference}px`
-    }
   }, [serverUsage])
 
   return (
@@ -131,7 +125,7 @@ export default function Dashboard() {
           </div>
           <div className="">
             <div>
-              <p>11/20</p>
+              <p>0/0</p>
             </div>
           </div>
         </div>
