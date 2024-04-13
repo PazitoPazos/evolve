@@ -1,13 +1,15 @@
-export function blobToText(blob: Blob) {
+export function blobToJson(blob: Blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
-
     reader.onload = () => {
-      resolve(reader.result)
+      try {
+        const json = JSON.parse(reader.result)
+        resolve(json)
+      } catch (error) {
+        reject(error)
+      }
     }
-
     reader.onerror = reject
-
     reader.readAsText(blob)
   })
 }

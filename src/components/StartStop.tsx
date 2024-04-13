@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import StartIcon from '../icons/StartIcon'
 import StopIcon from '../icons/StopIcon'
 import LoadingBar from './LoadingBar'
-import { blobToText } from '@/utils/blobToText'
+import { blobToJson } from '@/utils/blobToJson'
 import { useWebSocket } from '@/contexts/WebSocketContext'
+import { isConsoleData, isServerUsageData } from '@/types/types'
 
 interface StartStopProps {
   status: string
@@ -17,12 +18,17 @@ function StartStop({ status }: StartStopProps) {
     if (!ws) return
 
     const handleMessage = (event: MessageEvent) => {
-      blobToText(event.data).then((text) => {
-        console.log(text)
-        if (text.includes('Timings Reset')) {
-          setServerStatus('running')
-        } else if (text.includes('Closing Server')) {
-          setServerStatus('offline')
+      blobToJson(event.data).then((json) => {
+        if (isConsoleData(json)) {
+          const { stream, type, data } = json
+          if (data.includes('Timings Reset')) {
+            setServerStatus('running')
+          } else if (data.includes('Closing Server')) {
+            setServerStatus('offline')
+          }
+        } else if (isServerUsageData(json)) {
+        } else {
+          console.error('El JSON está malito', json)
         }
       })
     }

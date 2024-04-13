@@ -24,8 +24,8 @@ export default function RootLayout({
       >
         <WebSocketProvider>
           <Navbar />
+          {children}
         </WebSocketProvider>
-        {children}
       </body>
     </html>
   )

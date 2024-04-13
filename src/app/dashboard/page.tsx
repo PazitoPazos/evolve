@@ -2,7 +2,8 @@
 import ServerDetails from '@/components/ServerDetails'
 import StartStop from '@/components/StartStop'
 import { useWebSocket, WebSocketProvider } from '@/contexts/WebSocketContext'
-import { blobToText } from '@/utils/blobToText'
+import { isConsoleData, isServerUsageData, ServerUsageDetails } from '@/types/types'
+import { blobToJson } from '@/utils/blobToJson'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Dashboard() {
@@ -18,6 +19,9 @@ export default function Dashboard() {
     serverStatus: 'offline',
   }
 
+  const [serverUsage, setServerUsage] = useState<ServerUsageDetails | null>(
+    null
+  )
   const [percentage, setPercentage] = useState<number>(0)
   const [strokeColor, setStrokeColor] = useState<string>('')
   const [borderColor, setBorderColor] = useState<string>('')
@@ -30,12 +34,16 @@ export default function Dashboard() {
     if (!ws) return
 
     const handleMessage = (event: MessageEvent) => {
-      blobToText(event.data).then((text) => {
-        console.log(text)
-        if (text.includes('Timings Reset')) {
-          
-        } else if (text.includes('Closing Server')) {
-          
+      blobToJson(event.data).then((json) => {
+        console.log(json)
+
+        if (isServerUsageData(json)) {
+          const { stream, type, data } = json
+          const { cpuUsage, usedMem, totalMem } = data
+          setServerUsage(data)
+        } else if (isConsoleData(json)) {
+        } else {
+          console.error('El JSON está malito', json)
         }
       })
     }
@@ -48,15 +56,17 @@ export default function Dashboard() {
   }, [ws])
 
   useEffect(() => {
+    if (!serverUsage) return
+
     const intervalPercentage = setInterval(() => {
-      const newPercentage = getRandomPercentage(0, 100)
+      const newPercentage = serverUsage.cpuUsage
       const newColor = getColor(newPercentage)
       setPercentage(newPercentage)
       setStrokeColor(newColor)
     }, 1000)
 
     return () => clearInterval(intervalPercentage)
-  }, [])
+  }, [serverUsage])
 
   useEffect(() => {
     const circle = circleRef.current
@@ -68,23 +78,17 @@ export default function Dashboard() {
   }, [percentage])
 
   useEffect(() => {
+    if (!serverUsage) return
+
     const intervalUsedRam = setInterval(() => {
-      const newRamUsage = getRandomUsedRam(0, 6)
+      const newRamUsage = serverUsage.usedMem
       const newColor = getColor((newRamUsage / 6) * 100)
       setUsedRam(newRamUsage)
       setBorderColor(newColor)
     }, 1000)
 
     return () => clearInterval(intervalUsedRam)
-  }, [])
-
-  function getRandomPercentage(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min
-  }
-
-  function getRandomUsedRam(min: number, max: number): number {
-    return parseFloat((Math.random() * (max - min) + min).toFixed(2))
-  }
+  }, [serverUsage])
 
   function getColor(percentage: number): string {
     const green = [0, 137, 111]
