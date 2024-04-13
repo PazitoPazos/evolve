@@ -2,7 +2,8 @@
 import ServerDetails from '@/components/ServerDetails'
 import StartStop from '@/components/StartStop'
 import { useWebSocket, WebSocketProvider } from '@/contexts/WebSocketContext'
-import { isConsoleData, isServerUsageData, ServerUsageDetails } from '@/types/types'
+import { ServerUsageDetails } from '@/types/types.d'
+import { isConsoleData, isServerUsageData } from '@/types/types'
 import { blobToJson } from '@/utils/blobToJson'
 import { useEffect, useRef, useState } from 'react'
 
@@ -119,70 +120,68 @@ export default function Dashboard() {
   }
 
   return (
-    <WebSocketProvider>
-      <div className="max-w-7xl text-center">
-        <h1 className="text-3xl">Dashboard</h1>
+    <div className="max-w-7xl text-center">
+      <h1 className="text-3xl">Dashboard</h1>
 
-        <ServerDetails serverDetails={serverDetails} />
+      <ServerDetails serverDetails={serverDetails} />
 
-        <StartStop status={serverDetails.serverStatus} />
+      <StartStop status={serverDetails.serverStatus} />
 
-        <div className="grid w-full grid-cols-[repeat(3,minmax(300px,1fr))] justify-items-center gap-8">
-          <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
-            <div className="">
-              <p>CPU Usage</p>
-            </div>
-            <div className="">
-              <svg className="h-16 w-16" viewBox="0 0 100 100">
-                <circle
-                  className="transition-all duration-700 ease-in-out"
-                  ref={circleRef}
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  fill="transparent"
-                  stroke={strokeColor}
-                  strokeWidth="8"
-                  transform="rotate(-90, 50, 50)"
-                />
-                <text
-                  x="50"
-                  y="50"
-                  dominantBaseline="middle"
-                  textAnchor="middle"
-                  fill="white"
-                  fontSize={20}
-                >
-                  {percentage}%
-                </text>
-              </svg>
-            </div>
+      <div className="grid w-full grid-cols-[repeat(3,minmax(300px,1fr))] justify-items-center gap-8">
+        <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
+          <div className="">
+            <p>CPU Usage</p>
           </div>
-          <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
-            <div className="">
-              <p>RAM Usage</p>
-            </div>
-            <div className="">
-              <div
-                className=" border-4 border-solid p-2"
-                style={{ borderColor: borderColor }}
+          <div className="">
+            <svg className="h-16 w-16" viewBox="0 0 100 100">
+              <circle
+                className="transition-all duration-700 ease-in-out"
+                ref={circleRef}
+                cx="50"
+                cy="50"
+                r="40"
+                fill="transparent"
+                stroke={strokeColor}
+                strokeWidth="8"
+                transform="rotate(-90, 50, 50)"
+              />
+              <text
+                x="50"
+                y="50"
+                dominantBaseline="middle"
+                textAnchor="middle"
+                fill="white"
+                fontSize={20}
               >
-                <p>{usedRam.toFixed(2)}GB / 6GB</p>
-              </div>
+                {percentage.toFixed(2)}%
+              </text>
+            </svg>
+          </div>
+        </div>
+        <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
+          <div className="">
+            <p>RAM Usage</p>
+          </div>
+          <div className="">
+            <div
+              className=" border-4 border-solid p-2"
+              style={{ borderColor: borderColor }}
+            >
+              <p>{usedRam.toFixed(2)}GB / 6GB</p>
             </div>
           </div>
-          <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
-            <div className="">
-              <p>Players online</p>
-            </div>
-            <div className="">
-              <div>
-                <p>11/20</p>
-              </div>
+        </div>
+        <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
+          <div className="">
+            <p>Players online</p>
+          </div>
+          <div className="">
+            <div>
+              <p>11/20</p>
             </div>
           </div>
         </div>
       </div>
-    </WebSocketProvider>
+    </div>
   )
 }
