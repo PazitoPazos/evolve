@@ -1,37 +1,53 @@
+'use client'
+import { useWebSocket } from '@/contexts/WebSocketContext'
+import { useWebSocketData } from '@/contexts/WebSocketDataContext'
 import ChevronRight from '@/icons/ChevronRight'
+import { isConsoleData, isServerUsageData } from '@/types/types'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 export default function Console() {
-  const logHistory = [
-    '[12:00:00] [ServerMain/INFO]: Player1 joined the game',
-    '[12:05:00] [ServerMain/WARN]: Player2 left the game',
-    '[12:10:00] [ServerMain/INFO]: Player3: Hello everyone!',
-    '[12:15:00] [ServerMain/INFO]: Player4 was slain by Zombie',
-    '[12:20:00] [ServerMain/INFO]: Player1 joined the game',
-    '[12:25:00] [ServerMain/WARN]: Player2 left the game',
-    '[12:30:00] [ServerMain/INFO]: Player3: Hello everyone!',
-    '[12:35:00] [ServerMain/INFO]: Player4 was slain by Zombie',
-    '[12:40:00] [ServerMain/INFO]: Player1 joined the game',
-    '[12:45:00] [ServerMain/WARN]: Player2 left the game',
-    '[12:50:00] [ServerMain/INFO]: Player3: Hello everyone!',
-    '[12:55:00] [ServerMain/INFO]: Player4 was slain by Zombie',
-    '[13:00:00] [ServerMain/INFO]: Player1 joined the game',
-    '[13:05:00] [ServerMain/WARN]: Player2 left the game',
-    '[13:10:00] [ServerMain/INFO]: Player3: Hello everyone!',
-    '[13:15:00] [ServerMain/INFO]: Player4 was slain by Zombie',
-    '[13:20:00] [ServerMain/INFO]: Player1 joined the game',
-    '[13:25:00] [ServerMain/WARN]: Player2 left the game',
-    '[13:30:00] [ServerMain/INFO]: Player3: Hello everyone!',
-    '[13:35:00] [ServerMain/INFO]: Player4 was slain by Zombie',
-    '[13:40:00] [ServerMain/INFO]: Player1 joined the game',
-    '[13:45:00] [ServerMain/WARN]: Player2 left the game',
-    '[13:50:00] [ServerMain/INFO]: Player3: Hello everyone!',
-    '[13:55:00] [ServerMain/INFO]: Player4 was slain by Zombie',
-    '[14:00:00] [ServerMain/INFO]: Player1 joined the game',
-    '[14:05:00] [ServerMain/WARN]: Player2 left the game',
-    '[14:10:00] [ServerMain/INFO]: Player3: Hello everyone!',
-    '[14:15:00] [ServerMain/INFO]: Player4 was slain by Zombie',
-  ]
+  const [consoleLines, setConsoleLines] = useState<string[] | null>(null)
+  const { webSocketData, wsSendData } = useWebSocketData()
+  const { ws } = useWebSocket()
+
+  const lineRegex = /^\[\d{2}:\d{2}:\d{2}\]/
+
+  useEffect(() => {
+    // TODO: Make a interval for reconnect if ws is disconnected
+    // Envía el mensaje a través del WebSocket
+    if (ws) {
+      wsSendData({ action: 'unsubscribe', type: 'console' }, (error) => {
+        if (error) {
+          console.error('Error al enviar los datos:', error)
+        }
+      })
+      wsSendData({ action: 'unsubscribe', type: 'heap' }, (error) => {
+        if (error) {
+          console.error('Error al enviar los datos:', error)
+        }
+      })
+      wsSendData({ action: 'subscribe', type: 'console' }, (error) => {
+        if (error) {
+          console.error('Error al enviar los datos:', error)
+        }
+      })
+    }
+  }, [ws])
+
+  useEffect(() => {
+    if (!webSocketData) return
+
+    if (isServerUsageData(webSocketData)) {
+    } else if (isConsoleData(webSocketData)) {
+      const { data } = webSocketData
+      if (lineRegex.test(data)) {
+        setConsoleLines((prevLines) => [...(prevLines ?? []), data])
+      }
+    } else {
+      console.error('No se han podido recuperar los datos', webSocketData)
+    }
+  }, [webSocketData])
 
   return (
     <>
@@ -46,42 +62,76 @@ export default function Console() {
               Go to log -&gt;
             </Link>
           </div>
-          <div className="flex h-[32rem] flex-col-reverse overflow-y-auto p-2">
-            <ul>
-              {logHistory.map((l, i) => {
-                let spl = l.split(': ')
-                let info = spl[0]
-                let msg = spl[1]
-                return (
-                  <li className="" key={i}>
-                    <span
-                      className={
-                        'font-bold ' +
-                        (info.includes('INFO')
-                          ? 'text-blue-500 selection:bg-blue-700 selection:text-neutral-200'
-                          : 'text-red-500 selection:bg-red-600 selection:text-neutral-200')
-                      }
-                    >
-                      {info}
-                    </span>
-                    <span className="text-neutral-200 selection:bg-blue-700 selection:text-neutral-200">
-                      :&nbsp;{msg}
-                    </span>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-          <div className="flex gap-1 p-2 pr-10">
-            <ChevronRight />
-            <input
-              className="w-full border-b-2 bg-transparent outline-none"
-              autoFocus
-              type="text"
-              name=""
-              id=""
-            />
-          </div>
+          {consoleLines ? (
+            <>
+              <div className="flex h-[32rem] flex-col-reverse overflow-y-auto p-2">
+                <ul>
+                  {consoleLines.map((l, i) => {
+                    let spl = l.split(': ')
+                    let info = spl[0]
+                    let msg = spl[1]
+                    return (
+                      <li className="" key={i}>
+                        <span
+                          className={
+                            'font-bold ' +
+                            (info.includes('INFO')
+                              ? 'text-blue-500 selection:bg-blue-700 selection:text-neutral-200'
+                              : 'text-red-500 selection:bg-red-600 selection:text-neutral-200')
+                          }
+                        >
+                          {info}
+                        </span>
+                        <span className="text-neutral-200 selection:bg-blue-700 selection:text-neutral-200">
+                          :&nbsp;{msg}
+                        </span>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+              <div className="flex gap-1 p-2 pr-10">
+                <ChevronRight />
+                <input
+                  className="w-full border-b-2 bg-transparent outline-none"
+                  autoFocus
+                  type="text"
+                  name=""
+                  id=""
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex h-[32rem] items-center justify-center">
+                <div className="flex items-center gap-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="icon icon-tabler icons-tabler-outline icon-tabler-plug-connected-x"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M20 16l-4 4" />
+                    <path d="M7 12l5 5l-1.5 1.5a3.536 3.536 0 1 1 -5 -5l1.5 -1.5z" />
+                    <path d="M17 12l-5 -5l1.5 -1.5a3.536 3.536 0 1 1 5 5l-1.5 1.5z" />
+                    <path d="M3 21l2.5 -2.5" />
+                    <path d="M18.5 5.5l2.5 -2.5" />
+                    <path d="M10 11l-2 2" />
+                    <path d="M13 14l-2 2" />
+                    <path d="M16 16l4 4" />
+                  </svg>
+                  <p className="text-3xl">Desconectado</p>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

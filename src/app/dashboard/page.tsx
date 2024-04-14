@@ -6,8 +6,6 @@ import { isConsoleData, isServerUsageData } from '@/types/types'
 import { useEffect, useRef, useState } from 'react'
 import { useWebSocketData } from '@/contexts/WebSocketDataContext'
 import { updateColorsAndStroke } from '@/utils/updateColorsAndStroke'
-import useRouteWebSocket from '@/contexts/useRouteWebSocket'
-import { useRouter } from 'next/router'
 import { useWebSocket } from '@/contexts/WebSocketContext'
 
 export default function Dashboard() {
