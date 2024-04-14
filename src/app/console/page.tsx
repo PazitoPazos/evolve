@@ -11,7 +11,7 @@ export default function Console() {
   const { webSocketData, wsSendData } = useWebSocketData()
   const { ws } = useWebSocket()
 
-  const lineRegex = /^\[\d{2}:\d{2}:\d{2}\]/
+  const lineRegex = /^\[\d{2}:\d{2}:\d{2} [A-Z]*\]/
 
   useEffect(() => {
     // TODO: Make a interval for reconnect if ws is disconnected
@@ -42,7 +42,10 @@ export default function Console() {
     } else if (isConsoleData(webSocketData)) {
       const { data } = webSocketData
       if (lineRegex.test(data)) {
-        setConsoleLines((prevLines) => [...(prevLines ?? []), data])
+        const lines = data.split('\n').filter((line) => line.trim() !== '')
+        setConsoleLines((prevLines) => [...(prevLines ?? []), ...lines])
+      } else if (data.includes('Closing Server')) {
+        setConsoleLines(null)
       }
     } else {
       console.error('No se han podido recuperar los datos', webSocketData)
