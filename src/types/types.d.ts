@@ -16,6 +16,10 @@ export interface ServerUsageDetails {
   totalMem: number
 }
 
+export interface SubscribeData {
+  action: string
+  type: string
+}
 
 export function isConsoleData(obj: any): obj is ConsoleData;
 

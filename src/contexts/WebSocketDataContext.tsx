@@ -1,6 +1,5 @@
 'use client'
 import { ServerUsageData, ConsoleData } from '@/types/types.d'
-import { blobToJson } from '@/utils/blobToJson'
 import React, {
   createContext,
   ReactNode,
@@ -37,14 +36,13 @@ export const WebSocketDataProvider: React.FC<{ children: ReactNode }> = ({
     if (!ws) return
 
     const handleMessage = (event: MessageEvent) => {
-      blobToJson(event.data).then((json) => {
-        // Actualiza los datos según el tipo de mensaje
-        if (isServerUsageData(json) || isConsoleData(json)) {
-          setWebSocketData(json)
-        } else {
-          console.error('El JSON está malito', json)
-        }
-      })
+      const message = JSON.parse(event.data)
+      // Actualiza los datos según el tipo de mensaje
+      if (isServerUsageData(message) || isConsoleData(message)) {
+        setWebSocketData(message)
+      } else {
+        console.error('El JSON está malito', message)
+      }
     }
 
     ws.onmessage = handleMessage

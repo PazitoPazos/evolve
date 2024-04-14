@@ -1,11 +1,14 @@
 'use client'
 import ServerDetails from '@/components/ServerDetails'
 import StartStop from '@/components/StartStop'
-import { ServerUsageDetails } from '@/types/types.d'
+import { ServerUsageDetails, SubscribeData } from '@/types/types.d'
 import { isConsoleData, isServerUsageData } from '@/types/types'
 import { useEffect, useRef, useState } from 'react'
 import { useWebSocketData } from '@/contexts/WebSocketDataContext'
 import { updateColorsAndStroke } from '@/utils/updateColorsAndStroke'
+import useRouteWebSocket from '@/contexts/useRouteWebSocket'
+import { useRouter } from 'next/router'
+import { useWebSocket } from '@/contexts/WebSocketContext'
 
 export default function Dashboard() {
   const serverDetails = {
@@ -27,7 +30,25 @@ export default function Dashboard() {
   const [borderColor, setBorderColor] = useState<string>('currentColor')
   const circleRef = useRef<SVGCircleElement>(null)
 
-  const { webSocketData } = useWebSocketData()
+  const { webSocketData, wsSendData } = useWebSocketData()
+  const { ws } = useWebSocket()
+
+  useEffect(() => {
+    // TODO: Make a interval for reconnect if ws is disconnected
+    // Envía el mensaje a través del WebSocket
+    if (ws) {
+      wsSendData({ action: 'subscribe', type: 'console' }, (error) => {
+        if (error) {
+          console.error('Error al enviar los datos:', error)
+        }
+      })
+      wsSendData({ action: 'subscribe', type: 'heap' }, (error) => {
+        if (error) {
+          console.error('Error al enviar los datos:', error)
+        }
+      })
+    }
+  }, [ws])
 
   // TODO: Colors doesn't reset when close server
   useEffect(() => {
