@@ -48,10 +48,6 @@ export default function NavLinks() {
       path: '/account',
       text: 'Account',
     },
-    {
-      path: '/forgotpassword',
-      text: 'Forgot Password',
-    },
   ]
 
   const pathname = usePathname()

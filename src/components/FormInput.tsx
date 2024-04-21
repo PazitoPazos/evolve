@@ -3,13 +3,15 @@ import { removeDash } from '../utils/removeDash'
 
 interface FormInputProps {
   inputName: string
-  inputType: string // Proporciona un tipo explícito para inputType
+  inputType: string
   icon: React.ReactNode
   id: string
+  required?: boolean
   value?: string
   placeholder?: string
   focus?: boolean
   label?: boolean
+  onChange?: ((e: ChangeEvent<HTMLInputElement>) => void) | undefined
 }
 
 function FormInput({
@@ -17,17 +19,12 @@ function FormInput({
   inputType,
   icon,
   id,
-  value = '',
+  required = false,
   placeholder = '',
   focus = false,
   label = true,
+  onChange = undefined,
 }: FormInputProps) {
-  const [inputValue, setInputValue] = useState(value)
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value)
-  }
-
   return (
     <div className="">
       {label ? (
@@ -42,11 +39,12 @@ function FormInput({
         <input
           className="w-full rounded outline outline-1 outline-neutral-500 focus-visible:outline-2 focus-visible:outline-white"
           id={id}
+          name={inputName}
           type={inputType}
-          value={inputValue}
+          required={required}
           placeholder={placeholder}
           autoFocus={focus}
-          onChange={handleChange}
+          onChange={onChange}
         />
       </div>
     </div>

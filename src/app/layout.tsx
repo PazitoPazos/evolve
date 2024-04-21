@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
-import './globals.css'
+import '@/app/globals.css'
 import { spaceMono } from '@/fonts/fonts'
 import Navbar from '@/components/Navbar'
 import { WebSocketProvider } from '@/contexts/WebSocketContext'
 import { WebSocketDataProvider } from '@/contexts/WebSocketDataContext'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 export const metadata: Metadata = {
   title: 'Project SMWA',
@@ -23,12 +24,14 @@ export default function RootLayout({
           spaceMono.className
         }
       >
-        <WebSocketProvider>
-          <WebSocketDataProvider>
-            <Navbar />
-            {children}
-          </WebSocketDataProvider>
-        </WebSocketProvider>
+        <AuthProvider>
+          <WebSocketProvider>
+            <WebSocketDataProvider>
+              <Navbar />
+              {children}
+            </WebSocketDataProvider>
+          </WebSocketProvider>
+        </AuthProvider>
       </body>
     </html>
   )

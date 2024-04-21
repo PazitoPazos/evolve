@@ -1,5 +1,16 @@
-export type User = {
+import { JWTPayload } from 'jose'
+import { RowDataPacket } from 'mysql2'
+
+export interface UserData extends RowDataPacket {
   id: string
-  name: string
-  imgUrl: string
+  username: string
+  email: string
+  password: string
+  created_at: Date
+  status: number
+}
+
+export interface SessionPayload extends JWTPayload {
+  userId: string
+  expiresAt: Date
 }

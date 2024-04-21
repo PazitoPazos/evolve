@@ -1,11 +1,51 @@
+'use client'
+import CustomButton from '@/components/CustomButton'
+import { useAuth } from '@/contexts/AuthContext'
+import { useRouter } from 'next/navigation'
+
 export default function Home() {
+  const { state } = useAuth()
+
   return (
     <div>
+      <p>{state.isAuthenticated ? <LogoutButton /> : 'False'}</p>
+      <p>{state.user?.username}</p>
       <Header />
       <Features />
       <Pricing />
       <Footer />
     </div>
+  )
+}
+
+function LogoutButton() {
+  const { dispatch } = useAuth()
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/api/logout', {
+        method: 'POST',
+      })
+      if (response.ok) {
+        dispatch({ type: 'LOGOUT' })
+        router.push('/login') // Redirige a la página de inicio u otra página
+      } else {
+        console.error('Error al cerrar sesión:', response.statusText)
+      }
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error)
+    }
+  }
+
+  return (
+    <>
+      <CustomButton
+        id="logout-btn"
+        value="Logout"
+        onClick={handleLogout}
+      ></CustomButton>
+    </>
   )
 }
 
