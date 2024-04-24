@@ -23,7 +23,7 @@ function Navbar({ session }: NavbarProps) {
         method: 'POST',
       })
       if (response.ok) {
-        router.refresh() // Redirige a la página de inicio u otra página
+        router.replace('/') // Redirige a la página de inicio u otra página
       } else {
         console.error('Error al cerrar sesión:', response.statusText)
       }

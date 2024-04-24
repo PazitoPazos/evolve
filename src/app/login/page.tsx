@@ -35,7 +35,7 @@ export default function Login() {
 
       if (response.ok) {
         // El inicio de sesión fue exitoso, redirigir a la página de inicio u otra página
-        router.refresh() // Redirige a la página de inicio
+        router.replace('/') // Redirige a la página de inicio
       } else {
         // El inicio de sesión falló, mostrar un mensaje de error al usuario
         const errorMessage = await response.json()
