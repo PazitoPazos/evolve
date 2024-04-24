@@ -12,5 +12,6 @@ export interface UserData extends RowDataPacket {
 
 export interface SessionPayload extends JWTPayload {
   userId: string
-  expiresAt: Date
+  username: string
+  email: string
 }

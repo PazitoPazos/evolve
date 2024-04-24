@@ -6,7 +6,7 @@ import { createSession } from '@/lib/session'
 import { redirect } from 'next/navigation'
 import { UserData } from '@/lib/definitions'
 
-const secret = process.env.JWT_SECRET
+const secret = process.env.SESSION_SECRET
 
 export async function POST(req: NextRequest) {
   const { username, password }: User = await req.json()
@@ -40,12 +40,13 @@ export async function POST(req: NextRequest) {
     }
 
     // 4. Crear la sesión de usuario
-    await createSession(user.id)
+    await createSession({
+      userId: user.id,
+      username: user.username,
+      email: user.email,
+    })
 
-    return NextResponse.json(
-      { error: 'Éxito' },
-      { status: 200 }
-    )
+    return NextResponse.json({ error: 'Éxito' }, { status: 200 })
   } catch (error) {
     console.error('Error during login:', error)
     return NextResponse.json(

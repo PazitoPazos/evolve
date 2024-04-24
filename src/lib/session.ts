@@ -6,7 +6,7 @@ import { cookies } from 'next/headers'
 const secretKey = process.env.SESSION_SECRET
 const encodedKey = new TextEncoder().encode(secretKey)
 
-export async function encrypt(payload: SessionPayload) {
+export async function encrypt(payload: { user: SessionPayload; expiresAt: Date }) {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
@@ -19,15 +19,15 @@ export async function decrypt(session: string | undefined = '') {
     const { payload } = await jwtVerify(session, encodedKey, {
       algorithms: ['HS256'],
     })
-    return payload
+    return payload as { user: SessionPayload; expiresAt: Date }
   } catch (error) {
     console.log('Failed to verify session')
   }
 }
 
-export async function createSession(userId: string) {
+export async function createSession(user: SessionPayload) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-  const session = await encrypt({ userId, expiresAt })
+  const session = await encrypt({ user, expiresAt })
 
   cookies().set('session', session, {
     httpOnly: true,
@@ -58,4 +58,19 @@ export async function updateSession() {
 
 export function deleteSession() {
   cookies().delete('session')
+}
+
+export async function getSession() {
+  try {
+    const sessionToken = cookies().get('session')?.value
+    if (sessionToken) {
+      const payload = await decrypt(sessionToken)
+      return payload as { user: SessionPayload; expiresAt: Date }
+    } else {
+      return null
+    }
+  } catch (error) {
+    console.error('Error retrieving session:', error)
+    return null
+  }
 }

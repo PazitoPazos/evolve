@@ -4,12 +4,10 @@ import FormInput from '@/components/FormInput'
 import UserIcon from '@/icons/UserIcon'
 import PassIcon from '@/icons/PassIcon'
 import Link from 'next/link'
-import { FormEvent, MouseEventHandler, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@/contexts/AuthContext'
 
 export default function Login() {
-  const { dispatch } = useAuth()
   const router = useRouter()
   const [formData, setFormData] = useState({ username: '', password: '' })
 
@@ -37,11 +35,7 @@ export default function Login() {
 
       if (response.ok) {
         // El inicio de sesión fue exitoso, redirigir a la página de inicio u otra página
-        const username = formData.username
-        dispatch({ type: 'LOGIN', payload: { username } })
-
-
-        router.push('/') // Redirige a la página de inicio
+        router.refresh() // Redirige a la página de inicio
       } else {
         // El inicio de sesión falló, mostrar un mensaje de error al usuario
         const errorMessage = await response.json()
@@ -89,11 +83,6 @@ export default function Login() {
           <CustomButton id="login-btn" value="Login" />
         </form>
         <br />
-        <p>
-          <Link className="border-b-2 border-solid" href="/recover-password">
-            Forgot your password?
-          </Link>
-        </p>
         <p className="mt-2">
           Don&apos;t have an account?{' '}
           <Link className="border-b-2 border-solid" href="/register">

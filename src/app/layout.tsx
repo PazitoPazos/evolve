@@ -4,18 +4,20 @@ import { spaceMono } from '@/fonts/fonts'
 import Navbar from '@/components/Navbar'
 import { WebSocketProvider } from '@/contexts/WebSocketContext'
 import { WebSocketDataProvider } from '@/contexts/WebSocketDataContext'
-import { AuthProvider } from '@/contexts/AuthContext'
+import { getSession } from '@/lib/session'
 
 export const metadata: Metadata = {
   title: 'Project SMWA',
   description: 'Server Management Web App',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const session = await getSession()
+
   return (
     <html lang="en">
       <body
@@ -24,14 +26,12 @@ export default function RootLayout({
           spaceMono.className
         }
       >
-        <AuthProvider>
-          <WebSocketProvider>
-            <WebSocketDataProvider>
-              <Navbar />
-              {children}
-            </WebSocketDataProvider>
-          </WebSocketProvider>
-        </AuthProvider>
+        <WebSocketProvider>
+          <WebSocketDataProvider>
+            <Navbar session={session} />
+            {children}
+          </WebSocketDataProvider>
+        </WebSocketProvider>
       </body>
     </html>
   )
