@@ -4,6 +4,9 @@ import NavLinks from './NavLinks'
 import { SessionPayload } from '@/lib/definitions'
 import CustomButton from './CustomButton'
 import { useRouter } from 'next/navigation'
+import ArrowDownIcon from '@/icons/ArrowDownIcon'
+import LoginIcon from '@/icons/LoginIcon'
+import Link from 'next/link'
 
 interface NavbarProps {
   session: { user: SessionPayload; expiresAt: Date } | null
@@ -42,48 +45,48 @@ function Navbar({ session }: NavbarProps) {
         <NavLinks />
       </nav>
       <div className="relative flex items-center">
-        <button
-          onClick={toggleDropdown}
-          className="flex items-center text-white focus:outline-none"
-        >
-          {session ? (
-            <span>Hi, {session.user.username}!</span>
-          ) : (
-            <span>Login</span>
-          )}
-          <svg
-            className="ml-2 h-5 w-5"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
+        {session ? (
+          <button
+            onClick={toggleDropdown}
+            className="flex items-center text-white focus:outline-none"
           >
-            <path
-              fillRule="evenodd"
-              d="M10 12a1 1 0 0 1-.707-.293l-4-4a1 1 0 1 1 1.414-1.414L10 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414l-4 4A1 1 0 0 1 10 12z"
-            />
-          </svg>
-        </button>
+            <span>Hi, {session.user.username}!</span>
+            <ArrowDownIcon />
+          </button>
+        ) : (
+          <Link
+            href="/login"
+            className="flex items-center text-white focus:outline-none"
+          >
+            <span className='mr-2'>Login</span>
+            <LoginIcon />
+          </Link>
+        )}
         {isDropdownOpen && (
           <div className="absolute right-0 top-full mt-2 w-48 rounded bg-white shadow-lg">
-            <ul className="py-1">
-              <li>
-                <a
-                  href="/account"
-                  className="block px-4 py-2 text-gray-800 hover:bg-indigo-100"
-                >
-                  Account
-                </a>
-              </li>
-              <li>
-                <button
-                  id="btnLogout"
-                  className="block w-full px-4 py-2 text-center text-gray-800 hover:bg-indigo-100"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
+            {session ? (
+              <ul className="py-1">
+                <li>
+                  <a
+                    href="/account"
+                    className="block px-4 py-2 text-gray-800 hover:bg-indigo-100"
+                  >
+                    Account
+                  </a>
+                </li>
+                <li>
+                  <button
+                    id="btnLogout"
+                    className="block w-full px-4 py-2 text-center text-gray-800 hover:bg-indigo-100"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            ) : (
+              <></>
+            )}
           </div>
         )}
       </div>
