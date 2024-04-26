@@ -1,5 +1,5 @@
-import ArrowDownIcon from '../icons/ArrowDownIcon'
-import ArrowUpIcon from '../icons/ArrowUpIcon'
+import CircleArrowDownIcon from '../icons/CircleArrowDownIcon'
+import CircleArrowUpIcon from '../icons/CircleArrowUpIcon'
 import PencilIcon from '../icons/PencilIcon'
 
 interface ServerDetailsProps {
@@ -55,9 +55,9 @@ function ServerDetails({ serverDetails }: ServerDetailsProps) {
       <div className="">
         <div className="">
           {serverDetails.serverStatus === 'online' ? (
-            <ArrowUpIcon />
+            <CircleArrowUpIcon />
           ) : (
-            <ArrowDownIcon />
+            <CircleArrowDownIcon />
           )}
         </div>
       </div>

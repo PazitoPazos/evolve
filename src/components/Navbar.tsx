@@ -2,11 +2,10 @@
 import { useState } from 'react'
 import NavLinks from './NavLinks'
 import { SessionPayload } from '@/lib/definitions'
-import CustomButton from './CustomButton'
 import { useRouter } from 'next/navigation'
-import ArrowDownIcon from '@/icons/ArrowDownIcon'
 import LoginIcon from '@/icons/LoginIcon'
 import Link from 'next/link'
+import ChevronDown from '@/icons/ChevronDown'
 
 interface NavbarProps {
   session: { user: SessionPayload; expiresAt: Date } | null
@@ -50,15 +49,15 @@ function Navbar({ session }: NavbarProps) {
             onClick={toggleDropdown}
             className="flex items-center text-white focus:outline-none"
           >
-            <span>Hi, {session.user.username}!</span>
-            <ArrowDownIcon />
+            <span className="mr-2">Hi, {session.user.username}!</span>
+            <ChevronDown />
           </button>
         ) : (
           <Link
             href="/login"
             className="flex items-center text-white focus:outline-none"
           >
-            <span className='mr-2'>Login</span>
+            <span className="mr-2">Login</span>
             <LoginIcon />
           </Link>
         )}

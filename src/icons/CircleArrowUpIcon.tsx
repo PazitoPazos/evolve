@@ -1,4 +1,4 @@
-function ArrowUpIcon() {
+function CircleArrowUpIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -21,4 +21,4 @@ function ArrowUpIcon() {
   )
 }
 
-export default ArrowUpIcon
+export default CircleArrowUpIcon

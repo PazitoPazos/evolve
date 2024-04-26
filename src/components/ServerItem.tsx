@@ -1,5 +1,5 @@
-import ArrowDownIcon from '../icons/ArrowDownIcon'
-import ArrowUpIcon from '../icons/ArrowUpIcon'
+import CircleArrowDownIcon from '../icons/CircleArrowDownIcon'
+import CircleArrowUpIcon from '../icons/CircleArrowUpIcon'
 
 interface ServerItemProps {
   server: {
@@ -42,9 +42,9 @@ function ServerItem({ server }: ServerItemProps) {
       <div className="flex items-center">
         <div className="">
           {server.serverStatus === 'online' ? (
-            <ArrowUpIcon />
+            <CircleArrowUpIcon />
           ) : (
-            <ArrowDownIcon />
+            <CircleArrowDownIcon />
           )}
         </div>
       </div>
