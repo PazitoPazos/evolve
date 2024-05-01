@@ -50,7 +50,7 @@ function NavbarLeft() {
   ]
 
   const handleClick = () => {
-    setNavbarOpen(!navbarOpen)
+    setNavbarOpen((prevState) => !prevState)
   }
 
   return (
