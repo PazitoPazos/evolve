@@ -7,9 +7,9 @@ interface CustomListProps {
 
 function CustomList({ title, icon, itemName, items }: CustomListProps) {
   return (
-    <div className="group h-80 w-80 border-2 border-solid border-white px-2 hover:cursor-pointer hover:bg-neutral-700">
-      <div className="mb-1 mr-1 flex items-center justify-between border-b-2 border-solid border-b-white">
-        <div className="mb-1 text-lg">
+    <div className="group h-fit w-80 border-2 border-solid border-white px-2 hover:cursor-pointer hover:bg-neutral-700">
+      <div className="mb-1 mr-1 flex items-center justify-between border-b-2 border-solid border-b-white text-xl">
+        <div className="my-2">
           <h2>{title}</h2>
         </div>
         <div className="list-info">
@@ -21,7 +21,7 @@ function CustomList({ title, icon, itemName, items }: CustomListProps) {
           </div>
         </div>
       </div>
-      <div className="pb-1">
+      <div className="pb-1 text-lg">
         <ul>
           {items.map((item, index) => (
             <li className="ml-5 list-disc" key={index}>

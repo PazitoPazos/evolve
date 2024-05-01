@@ -86,14 +86,14 @@ export default function Dashboard() {
   }, [serverUsage])
 
   return (
-    <div className="">
-      <h1 className="text-center text-3xl">Dashboard</h1>
+    <div className="w-2/3">
+      <h1 className="text-center text-4xl">Dashboard</h1>
 
       <ServerDetails serverDetails={serverDetails} />
 
       <StartStop />
 
-      <div className="grid w-full grid-cols-[repeat(2,minmax(450px,1fr))] justify-items-center gap-8">
+      <div className="grid grid-cols-2 justify-items-center gap-8 text-lg">
         <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
           <div className="">
             <p>CPU Usage</p>
@@ -112,12 +112,12 @@ export default function Dashboard() {
                 transform="rotate(-90, 50, 50)"
               />
               <text
-                x="50"
-                y="50"
+                x="52"
+                y="52"
                 dominantBaseline="middle"
                 textAnchor="middle"
                 fill="white"
-                fontSize={20}
+                fontSize={24}
               >
                 {serverUsage?.cpuUsage.toFixed(2) ?? 0}%
               </text>

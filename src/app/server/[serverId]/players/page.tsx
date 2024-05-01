@@ -57,30 +57,30 @@ export default function Players() {
   return (
     <>
       <div className="">
-        <h1 className="text-center text-3xl">Players</h1>
+        <h1 className="text-center text-4xl">Players</h1>
         <div className="mt-4 grid grid-cols-2 gap-8">
           {/* //TODO: Add logic to open lists in the middle of screen */}
           <CustomList
             title="Whitelist"
-            icon={<UserIcon />}
+            icon={<UserIcon height={'32'} width={'32'} />}
             itemName="player"
             items={whiteList}
           />
           <CustomList
             title="OPs"
-            icon={<CrownIcon />}
+            icon={<CrownIcon height={'32'} width={'32'} />}
             itemName="player"
             items={opList}
           />
           <CustomList
             title="Banned Players"
-            icon={<UserOffIcon />}
+            icon={<UserOffIcon height={'32'} width={'32'} />}
             itemName="player"
             items={bannedPlayers}
           />
           <CustomList
             title="Banned IPs"
-            icon={<LocationOffIcon />}
+            icon={<LocationOffIcon height={'32'} width={'32'} />}
             itemName="IP"
             items={bannedIPs}
           />

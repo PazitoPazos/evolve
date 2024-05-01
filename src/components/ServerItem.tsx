@@ -5,9 +5,9 @@ function ServerItem({ server }: { server: ServerItemData }) {
   return (
     <Link
       href={`/server/${server.id}/dashboard`}
-      className="mt-4 flex cursor-pointer justify-between border-2 border-solid border-white px-4 py-0 hover:bg-neutral-700"
+      className="flex w-full cursor-pointer justify-between border-2 border-solid border-white px-4 py-0 hover:bg-neutral-700"
     >
-      <div className="flex items-center">
+      <div className="flex items-center text-lg">
         <div className="">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="h-32 w-32" src={server.icon} alt="server-icon" />

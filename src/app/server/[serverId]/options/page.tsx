@@ -27,7 +27,7 @@ export default function Options() {
   return (
     <>
       <div className="w-2/3">
-        <h1 className="text-center text-3xl">Options</h1>
+        <h1 className="text-center text-4xl">Options</h1>
         <div className="mt-4 flex min-w-96 flex-col border-2 border-solid border-white p-4">
           <div className="flex items-center text-2xl">
             <div className="">

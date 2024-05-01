@@ -55,7 +55,7 @@ function StartStop() {
         className={
           serverStatus === 'loading'
             ? 'hidden'
-            : 'flex cursor-pointer items-center gap-1 hover:text-gray-400'
+            : 'flex cursor-pointer items-center gap-1 text-lg hover:text-gray-400'
         }
         onClick={
           serverStatus === 'running' ? handleClickStop : handleClickStart

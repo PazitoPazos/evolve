@@ -40,11 +40,11 @@ export default function About() {
   return (
     <>
       <div className="w-2/3">
-        <h1 className="text-center text-3xl">Log</h1>
+        <h1 className="text-center text-4xl">Log</h1>
         <div className="mt-4 flex flex-col border-2">
           <div className="flex items-center justify-end border-b-2 p-2">
             <Link
-              className="w-fit rounded bg-neutral-500 px-2 py-1 text-sm"
+              className="w-fit rounded bg-neutral-500 px-2 py-1 text-lg"
               href={'console'}
             >
               Go to console -&gt;
