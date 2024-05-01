@@ -1,14 +1,16 @@
 'use client'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import LoginIcon from '@/icons/LoginIcon'
 import Link from 'next/link'
 import ChevronDownIcon from '@/icons/ChevronDownIcon'
 import { useAuth } from '@/hooks/useAuth'
+import ServerIcon from '@/icons/ServerIcon'
 
 function NavbarTop() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const router = useRouter()
+  const { serverId } = useParams()
   const { session } = useAuth()
 
   const toggleDropdown = () => {
@@ -36,6 +38,15 @@ function NavbarTop() {
         <img src="/logo.svg" alt="Logo" className="mr-4 h-8" />
         <span className="font-bold text-white">Evolve</span>
       </Link>
+      {serverId && (
+        <Link
+          href={'/servers'}
+          className="flex items-center px-4 hover:bg-indigo-400 hover:text-neutral-100"
+        >
+          <ServerIcon />
+          <span className="ml-2 font-bold text-white">My servers</span>
+        </Link>
+      )}
       <div className="relative flex items-center">
         {session ? (
           <button
