@@ -1,26 +1,18 @@
 'use client'
 import ServerDetails from '@/components/ServerDetails'
 import StartStop from '@/components/StartStop'
-import { ServerUsageDetails, SubscribeData } from '@/types/types.d'
+import { ServerDetailsData, ServerUsageDetails } from '@/types/types.d'
 import { isConsoleData, isServerUsageData } from '@/types/types'
 import { useEffect, useRef, useState } from 'react'
-import { useWebSocketData } from '@/contexts/WebSocketDataContext'
+import { useWebSocketData } from '@/hooks/useWebSocketData'
 import { updateColorsAndStroke } from '@/utils/updateColorsAndStroke'
-import { useWebSocket } from '@/contexts/WebSocketContext'
+import { useWebSocket } from '@/hooks/useWebSocket'
+import { useParams } from 'next/navigation'
 
 export default function Dashboard() {
-  const serverDetails = {
-    serverName: 'Server 3',
-    serverId: '0003',
-    serverAddress: 'server3.example.com',
-    serverPort: '25565',
-    serverVersion: 'Bukkit 1.19.0',
-    serverDescription: 'Server 3 description',
-    serverIcon:
-      'https://cdn.shopify.com/s/files/1/0405/2058/1286/articles/how-to-add-a-server-icon-to-your-minecraft-server-435588.png?v=1662094872',
-    serverStatus: 'offline',
-  }
-
+  const [serverDetails, setServerDetails] = useState<ServerDetailsData | null>(
+    null
+  )
   const [serverUsage, setServerUsage] = useState<ServerUsageDetails | null>(
     null
   )
@@ -30,6 +22,16 @@ export default function Dashboard() {
 
   const { webSocketData, wsSendData } = useWebSocketData()
   const { ws } = useWebSocket()
+  const { serverId } = useParams()
+
+  useEffect(() => {
+    fetch(`/api/server/id/${serverId}`, { method: 'GET' })
+      .then((res) => res.json())
+      .then((data) => {
+        const details = JSON.parse(data)
+        setServerDetails(details)
+      })
+  }, [])
 
   useEffect(() => {
     // TODO: Make a interval for reconnect if ws is disconnected
@@ -84,14 +86,14 @@ export default function Dashboard() {
   }, [serverUsage])
 
   return (
-    <div className="max-w-7xl text-center">
-      <h1 className="text-3xl">Dashboard</h1>
+    <div className="">
+      <h1 className="text-center text-3xl">Dashboard</h1>
 
       <ServerDetails serverDetails={serverDetails} />
 
-      <StartStop status={serverDetails.serverStatus} />
+      <StartStop />
 
-      <div className="grid w-full grid-cols-[repeat(3,minmax(300px,1fr))] justify-items-center gap-8">
+      <div className="grid w-full grid-cols-[repeat(2,minmax(450px,1fr))] justify-items-center gap-8">
         <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
           <div className="">
             <p>CPU Usage</p>
@@ -135,16 +137,6 @@ export default function Dashboard() {
                 {serverUsage?.usedMem.toFixed(2) ?? 0}GB /{' '}
                 {serverUsage?.totalMem.toFixed(0) ?? 0}GB
               </p>
-            </div>
-          </div>
-        </div>
-        <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
-          <div className="">
-            <p>Players online</p>
-          </div>
-          <div className="">
-            <div>
-              <p>0/0</p>
             </div>
           </div>
         </div>

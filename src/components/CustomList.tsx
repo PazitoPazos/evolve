@@ -7,7 +7,7 @@ interface CustomListProps {
 
 function CustomList({ title, icon, itemName, items }: CustomListProps) {
   return (
-    <div className="group w-64 border-2 border-solid border-white px-2 hover:cursor-pointer hover:bg-neutral-700">
+    <div className="group h-80 w-80 border-2 border-solid border-white px-2 hover:cursor-pointer hover:bg-neutral-700">
       <div className="mb-1 mr-1 flex items-center justify-between border-b-2 border-solid border-b-white">
         <div className="mb-1 text-lg">
           <h2>{title}</h2>

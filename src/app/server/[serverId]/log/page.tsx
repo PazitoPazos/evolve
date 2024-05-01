@@ -1,6 +1,6 @@
 'use client'
-import { useWebSocket } from '@/contexts/WebSocketContext'
-import { useWebSocketData } from '@/contexts/WebSocketDataContext'
+import { useWebSocket } from '@/hooks/useWebSocket'
+import { useWebSocketData } from '@/hooks/useWebSocketData'
 import { isConsoleData } from '@/types/types'
 import { isServerUsageData } from '@/types/types'
 import Link from 'next/link'
@@ -45,7 +45,7 @@ export default function About() {
           <div className="flex items-center justify-end border-b-2 p-2">
             <Link
               className="w-fit rounded bg-neutral-500 px-2 py-1 text-sm"
-              href={'/console'}
+              href={'console'}
             >
               Go to console -&gt;
             </Link>

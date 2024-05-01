@@ -1,19 +1,15 @@
 'use client'
 import { useState } from 'react'
-import NavLinks from './NavLinks'
-import { SessionPayload } from '@/lib/definitions'
 import { useRouter } from 'next/navigation'
 import LoginIcon from '@/icons/LoginIcon'
 import Link from 'next/link'
-import ChevronDown from '@/icons/ChevronDown'
+import ChevronDownIcon from '@/icons/ChevronDownIcon'
+import { useAuth } from '@/hooks/useAuth'
 
-interface NavbarProps {
-  session: { user: SessionPayload; expiresAt: Date } | null
-} // Asignamos la interfaz SessionPayload a la prop session
-
-function Navbar({ session }: NavbarProps) {
+function NavbarTop() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const router = useRouter()
+  const { session } = useAuth()
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState)
@@ -35,22 +31,19 @@ function Navbar({ session }: NavbarProps) {
   }
 
   return (
-    <div className="absolute left-0 top-0 flex h-12 w-full justify-between bg-indigo-500 px-4 text-center">
-      <div className="flex items-center">
+    <div className="absolute left-0 top-0 flex h-16 w-full justify-between bg-indigo-500 px-4 text-center text-2xl">
+      <Link href={'/'} className="flex items-center">
         <img src="/logo.svg" alt="Logo" className="mr-4 h-8" />
-        <span className="text-xl font-bold text-white">Evolve</span>
-      </div>
-      <nav className="inline-flex h-full items-center gap-4">
-        <NavLinks />
-      </nav>
+        <span className="font-bold text-white">Evolve</span>
+      </Link>
       <div className="relative flex items-center">
         {session ? (
           <button
             onClick={toggleDropdown}
             className="flex items-center text-white focus:outline-none"
           >
-            <span className="mr-2">Hi, {session.user.username}!</span>
-            <ChevronDown />
+            <span className="mr-2">{session.username}</span>
+            <ChevronDownIcon />
           </button>
         ) : (
           <Link
@@ -66,17 +59,17 @@ function Navbar({ session }: NavbarProps) {
             {session ? (
               <ul className="py-1">
                 <li>
-                  <a
+                  <Link
                     href="/account"
-                    className="block px-4 py-2 text-gray-800 hover:bg-indigo-100"
+                    className="block px-4 py-2 text-xl text-gray-800 hover:bg-indigo-100"
                   >
                     Account
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <button
                     id="btnLogout"
-                    className="block w-full px-4 py-2 text-center text-gray-800 hover:bg-indigo-100"
+                    className="block w-full px-4 py-2 text-center text-xl text-gray-800 hover:bg-indigo-100"
                     onClick={handleLogout}
                   >
                     Logout
@@ -93,4 +86,4 @@ function Navbar({ session }: NavbarProps) {
   )
 }
 
-export default Navbar
+export default NavbarTop

@@ -22,7 +22,7 @@ function OptionText({
 
   return (
     <div className="col-span-2 border-2 border-solid border-white p-4">
-      <div className="flex flex-grow flex-wrap items-center justify-between border-2 border-solid border-white px-4 py-3 text-lg">
+      <div className="flex flex-grow flex-wrap items-center justify-between border-2 border-solid border-white px-3 py-3 text-xl">
         <label htmlFor={optionId}>{optionDesc}</label>
         <input
           className="w-3/4 text-lg"
@@ -33,7 +33,7 @@ function OptionText({
           onChange={handleChange}
         />
       </div>
-      <div className="flex border-2 border-t-0 border-solid border-white p-1 text-sm">
+      <div className="flex border-2 border-t-0 border-solid border-white p-1 pl-3 text-md">
         <span className="font-bold">{optionKey}</span>=
         <span className="">{optionValue}</span>
       </div>

@@ -1,4 +1,4 @@
-function LoginIcon({ height, width }: { height?: string; width?: string }) {
+function DashboardIcon({ height, width }: { height?: string; width?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -10,14 +10,14 @@ function LoginIcon({ height, width }: { height?: string; width?: string }) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="icon icon-tabler icons-tabler-outline icon-tabler-login-2"
+      className="icon icon-tabler icons-tabler-outline icon-tabler-dashboard"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
-      <path d="M3 12h13l-3 -3" />
-      <path d="M13 15l3 -3" />
+      <path d="M12 13m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      <path d="M13.45 11.55l2.05 -2.05" />
+      <path d="M6.4 20a9 9 0 1 1 11.2 0z" />
     </svg>
   )
 }
 
-export default LoginIcon
+export default DashboardIcon

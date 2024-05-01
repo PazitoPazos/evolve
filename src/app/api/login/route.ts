@@ -3,7 +3,6 @@ import { getUserByUsername } from '@/lib/db'
 import { User } from '@/models/users.model'
 import { NextRequest, NextResponse } from 'next/server'
 import { createSession } from '@/lib/session'
-import { redirect } from 'next/navigation'
 import { UserData } from '@/lib/definitions'
 
 const secret = process.env.SESSION_SECRET

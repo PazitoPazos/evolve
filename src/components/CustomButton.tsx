@@ -18,7 +18,7 @@ function CustomButton({
   return (
     <div className="">
       <button
-        className="rounded bg-neutral-500 px-2 py-1 text-sm"
+        className="rounded bg-neutral-500 px-2 py-1 text-xl"
         id={id}
         type={type}
         onClick={onClick}

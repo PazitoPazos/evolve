@@ -8,25 +8,51 @@ export default function Players() {
   const whiteList = [
     'Username 1',
     'Username 2',
-    '...',
+    'Username 3',
+    'Username 4',
+    'Username 5',
+    'Username 6',
+    'Username 7',
+    'Username 8',
     'Username 9',
-    'Username 10',
+    '...',
   ]
   const opList = [
     'Username 1',
     'Username 2',
-    '...',
+    'Username 3',
+    'Username 4',
+    'Username 5',
+    'Username 6',
+    'Username 7',
+    'Username 8',
     'Username 9',
-    'Username 10',
+    '...',
   ]
   const bannedPlayers = [
     'Username 1',
     'Username 2',
-    '...',
+    'Username 3',
+    'Username 4',
+    'Username 5',
+    'Username 6',
+    'Username 7',
+    'Username 8',
     'Username 9',
-    'Username 10',
+    '...',
   ]
-  const bannedIPs = ['IP 1', 'IP 2', '...', 'IP 9', 'IP 10']
+  const bannedIPs = [
+    'IP 1',
+    'IP 2',
+    'IP 3',
+    'IP 4',
+    'IP 5',
+    'IP 6',
+    'IP 7',
+    'IP 8',
+    'IP 9',
+    '...',
+  ]
 
   return (
     <>

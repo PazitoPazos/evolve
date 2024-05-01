@@ -1,7 +1,7 @@
 'use client'
-import { useWebSocket } from '@/contexts/WebSocketContext'
-import { useWebSocketData } from '@/contexts/WebSocketDataContext'
-import ChevronRight from '@/icons/ChevronRight'
+import { useWebSocket } from '@/hooks/useWebSocket'
+import { useWebSocketData } from '@/hooks/useWebSocketData'
+import ChevronRightIcon from '@/icons/ChevronRightIcon'
 import { isConsoleData, isServerUsageData } from '@/types/types'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -60,7 +60,7 @@ export default function Console() {
           <div className="flex items-center justify-end border-b-2 p-2">
             <Link
               className="w-fit rounded bg-neutral-500 px-2 py-1 text-sm"
-              href={'/log'}
+              href={'log'}
             >
               Go to log -&gt;
             </Link>
@@ -94,7 +94,7 @@ export default function Console() {
                 </ul>
               </div>
               <div className="flex gap-1 p-2 pr-10">
-                <ChevronRight />
+                <ChevronRightIcon />
                 <input
                   className="w-full border-b-2 bg-transparent outline-none"
                   autoFocus

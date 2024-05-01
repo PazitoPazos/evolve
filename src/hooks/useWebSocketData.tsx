@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import { useWebSocket } from './WebSocketContext'
+import { useWebSocket } from './useWebSocket'
 import { isConsoleData, isServerUsageData } from '@/types/types'
 
 type WebSocketData = ConsoleData | ServerUsageData

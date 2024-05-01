@@ -1,3 +1,37 @@
+import { RowDataPacket } from 'mysql2'
+
+export interface FormDialogProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export interface ServerDetailsData {
+  name: string
+  id: string
+  address: string
+  port: string
+  version: string
+  description: string
+  icon: string
+  status: string
+}
+
+export interface ServerItemData {
+  name: string
+  id: string
+  description: string
+  icon: string
+  version: string
+}
+
+export interface ServerItemDataRDP extends RowDataPacket {
+  name: string
+  id: string
+  description: string
+  icon: string
+  version: string
+}
+
 export interface ConsoleData {
   stream: string
   type: string
@@ -21,8 +55,10 @@ export interface SubscribeData {
   type: string
 }
 
-export function isConsoleData(obj: any): obj is ConsoleData;
+export function isServerItemData(obj: any): obj is ServerItemData
 
-export function isServerUsageData(obj: any): obj is ServerUsageData;
+export function isConsoleData(obj: any): obj is ConsoleData
 
-export function isServerUsageDetails(obj: any): obj is ServerUsageDetails;
+export function isServerUsageData(obj: any): obj is ServerUsageData
+
+export function isServerUsageDetails(obj: any): obj is ServerUsageDetails

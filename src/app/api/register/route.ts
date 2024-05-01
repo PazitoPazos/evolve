@@ -37,9 +37,11 @@ export async function POST(req: NextRequest) {
     // Encriptar la contraseña antes de almacenarla
     const hashedPassword = await hash(password, 10) // 10 es el número de rondas de hashing
 
+    const userId = crypto.randomUUID()
+
     // Insertar el nuevo usuario en la base de datos con la contraseña encriptada
     await connection.execute(
-      'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
+       `INSERT INTO users (id, username, email, password) VALUES ('${userId}', ?, ?, ?)`,
       [username, email, hashedPassword]
     )
 

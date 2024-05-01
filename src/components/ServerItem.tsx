@@ -1,54 +1,33 @@
-import CircleArrowDownIcon from '../icons/CircleArrowDownIcon'
-import CircleArrowUpIcon from '../icons/CircleArrowUpIcon'
+import { ServerItemData } from '@/types/types.d'
+import Link from 'next/link'
 
-interface ServerItemProps {
-  server: {
-    serverIcon: string
-    serverName: string
-    serverId: string
-    serverDescription: string
-    serverVersion: string
-    serverStatus: string
-  }
-}
-
-function ServerItem({ server }: ServerItemProps) {
+function ServerItem({ server }: { server: ServerItemData }) {
   return (
-    <div className="mt-4 flex cursor-pointer justify-between border-2 border-solid border-white px-4 py-0 hover:bg-neutral-700">
+    <Link
+      href={`/server/${server.id}/dashboard`}
+      className="mt-4 flex cursor-pointer justify-between border-2 border-solid border-white px-4 py-0 hover:bg-neutral-700"
+    >
       <div className="flex items-center">
         <div className="">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="h-32 w-32"
-            src={server.serverIcon}
-            alt="server-icon"
-          />
+          <img className="h-32 w-32" src={server.icon} alt="server-icon" />
         </div>
         <div className="mb-2 ml-3 mt-2 text-left leading-5">
           <div className="">
-            <p>{server.serverName}</p>
+            <p>{server.name}</p>
           </div>
           <div className="text-gray-400">
-            <p>#{server.serverId}</p>
+            <p>#{server.id}</p>
           </div>
           <div className="">
-            <p>{server.serverDescription}</p>
+            <p>{server.description}</p>
           </div>
           <div className="">
-            <p>{server.serverVersion}</p>
+            <p>{server.version}</p>
           </div>
         </div>
       </div>
-      <div className="flex items-center">
-        <div className="">
-          {server.serverStatus === 'online' ? (
-            <CircleArrowUpIcon />
-          ) : (
-            <CircleArrowDownIcon />
-          )}
-        </div>
-      </div>
-    </div>
+    </Link>
   )
 }
 

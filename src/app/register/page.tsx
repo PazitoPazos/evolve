@@ -37,7 +37,7 @@ export default function SignUp() {
         },
         body: JSON.stringify(formData),
       })
-      
+
       if (response.ok) {
         // El registro fue exitoso, redirigir a la página de inicio de sesión u otra página
         // Puedes manejar la redirección aquí
@@ -59,8 +59,8 @@ export default function SignUp() {
 
   return (
     <>
-      <div className="w-96 text-center">
-        <div className="">
+      <div className="flex h-full flex-col items-center justify-center text-center">
+        <div className="w-full">
           <Link className="flex items-center justify-center" href="/">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -69,17 +69,17 @@ export default function SignUp() {
               alt="Logo"
             />
           </Link>
-          <h1 className="mb-8 mt-4 text-2xl">Register to SMWA</h1>
+          <h1 className="mb-8 mt-4 text-4xl">Register</h1>
         </div>
         <form
-          className="border-2 border-solid border-white p-4"
+          className="w-1/4 border-2 border-solid border-white p-4"
           onSubmit={handleSubmit}
         >
           <FormInput
             id="emailInput"
             inputName="email"
             inputType="text"
-            icon={<MailIcon />}
+            icon={<MailIcon height={'36'} width={'36'} />}
             value={formData.email}
             onChange={handleChange}
             required
@@ -89,7 +89,7 @@ export default function SignUp() {
             id="usernameInput"
             inputName="username"
             inputType="text"
-            icon={<UserIcon />}
+            icon={<UserIcon height={'36'} width={'36'} />}
             value={formData.username}
             onChange={handleChange}
             required
@@ -98,7 +98,7 @@ export default function SignUp() {
             id="passwordInput"
             inputName="password"
             inputType="password"
-            icon={<PassIcon />}
+            icon={<PassIcon height={'36'} width={'36'} />}
             value={formData.password}
             onChange={handleChange}
             required
@@ -107,7 +107,7 @@ export default function SignUp() {
             id="repasswordInput"
             inputName="repassword"
             inputType="password"
-            icon={<PassIcon />}
+            icon={<PassIcon height={'36'} width={'36'} />}
             value={formData.repassword}
             onChange={handleChange}
             required
@@ -115,7 +115,7 @@ export default function SignUp() {
           <CustomButton id="sign-up-button" type="submit" value="Register" />
         </form>
         <br />
-        <p>
+        <p className="mt-2 text-xl">
           Do you have an account?{' '}
           <Link className="border-b-2 border-solid" href="/login">
             Go to login

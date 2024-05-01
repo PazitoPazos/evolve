@@ -1,10 +1,16 @@
-function CircleArrowUpIcon() {
+function CircleArrowUpIcon({
+  height,
+  width,
+}: {
+  height?: string
+  width?: string
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className="icon icon-tabler icon-tabler-circle-arrow-up"
-      width="64"
-      height="64"
+      width={width ?? '24'}
+      height={height ?? '24'}
       viewBox="0 0 24 24"
       strokeWidth="2"
       stroke="#00896F"

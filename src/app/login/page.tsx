@@ -35,7 +35,7 @@ export default function Login() {
 
       if (response.ok) {
         // El inicio de sesión fue exitoso, redirigir a la página de inicio u otra página
-        router.replace('/') // Redirige a la página de inicio
+        router.push('/servers') // Redirige a la página de inicio
       } else {
         // El inicio de sesión falló, mostrar un mensaje de error al usuario
         const errorMessage = await response.json()
@@ -49,8 +49,8 @@ export default function Login() {
 
   return (
     <>
-      <div className="w-96 text-center">
-        <div className="">
+      <div className="flex h-full flex-col items-center justify-center text-center">
+        <div className="w-full">
           <Link className="flex items-center justify-center" href="/">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -59,17 +59,17 @@ export default function Login() {
               alt="Logo"
             />
           </Link>
-          <h1 className="mb-8 mt-4 text-2xl">Login to SMWA</h1>
+          <h1 className="mb-8 mt-4 text-4xl">Login</h1>
         </div>
         <form
           onSubmit={handleSubmit}
-          className="border-2 border-solid border-white p-4"
+          className="w-1/4 border-2 border-solid border-white p-4"
         >
           <FormInput
             id="usernameInput"
             inputName="username"
             inputType="text"
-            icon={<UserIcon />}
+            icon={<UserIcon height={'36'} width={'36'} />}
             focus
             onChange={handleChange}
           />
@@ -77,13 +77,13 @@ export default function Login() {
             id="passwordInput"
             inputName="password"
             inputType="password"
-            icon={<PassIcon />}
+            icon={<PassIcon height={'36'} width={'36'} />}
             onChange={handleChange}
           />
           <CustomButton id="login-btn" value="Login" />
         </form>
         <br />
-        <p className="mt-2">
+        <p className="mt-2 text-xl">
           Don&apos;t have an account?{' '}
           <Link className="border-b-2 border-solid" href="/register">
             Go to register

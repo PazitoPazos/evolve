@@ -3,14 +3,10 @@ import StartIcon from '../icons/StartIcon'
 import StopIcon from '../icons/StopIcon'
 import LoadingBar from './LoadingBar'
 import { isConsoleData, isServerUsageData } from '@/types/types'
-import { useWebSocketData } from '@/contexts/WebSocketDataContext'
+import { useWebSocketData } from '@/hooks/useWebSocketData'
 
-interface StartStopProps {
-  status: string
-}
-
-function StartStop({ status }: StartStopProps) {
-  const [serverStatus, setServerStatus] = useState(status)
+function StartStop() {
+  const [serverStatus, setServerStatus] = useState('offline')
   const { webSocketData, wsSendData } = useWebSocketData()
 
   useEffect(() => {
