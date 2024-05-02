@@ -11,15 +11,20 @@ function ListOfServers() {
   const [servers, setServers] = useState<ServerItemData[]>([])
   const [isOpen, setIsOpen] = useState(false)
 
+  const router = useRouter()
   const { session } = useAuth()
 
   useEffect(() => {
-    fetch(`/api/server/${session?.userId}`, { method: 'GET' })
-      .then((res) => res.json())
-      .then((data) => {
-        setServers(JSON.parse(data))
-      })
-  }, [])
+    if (session) {
+      fetch(`/api/server/${session?.userId}`, { method: 'GET' })
+        .then((res) => res.json())
+        .then((data) => {
+          setServers(JSON.parse(data))
+        })
+    } else {
+      router.refresh()
+    }
+  }, [session])
 
   // Manejador para abrir el dialog
   const handleOpenDialog = () => {

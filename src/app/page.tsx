@@ -1,4 +1,18 @@
+'use client'
+import { useAuth } from '@/hooks/useAuth'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+
 export default function Home() {
+  const { session } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (session) {
+      router.refresh()
+    }
+  }, [])
+
   return (
     <div>
       <Header />
