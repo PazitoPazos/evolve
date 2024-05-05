@@ -41,10 +41,7 @@ function NavbarTop() {
 
   return (
     <div className="absolute left-0 top-0 flex h-16 w-full justify-between bg-primary text-center text-2xl text-accent">
-      <Link
-        href={'/'}
-        className="flex items-center gap-2 px-2"
-      >
+      <Link href={'/'} className="flex items-center gap-2 px-2">
         <Image
           src="/logo.png"
           alt="Logo"
@@ -56,7 +53,7 @@ function NavbarTop() {
       {serverId ? (
         <Link
           href={'/servers'}
-          className="hover:text-accent-light flex items-center px-4 hover:bg-primary-light"
+          className="flex items-center px-4 hover:bg-primary-light hover:text-accent-light"
         >
           <ServerIcon />
           <span className="ml-2 font-bold">My servers</span>
@@ -64,7 +61,7 @@ function NavbarTop() {
       ) : (
         <></>
       )}
-      <div className="relative flex items-center px-4">
+      <div className="relative flex items-center px-4 font-bold">
         {session ? (
           <button
             onClick={toggleDropdown}
@@ -86,7 +83,7 @@ function NavbarTop() {
                 <li>
                   <button
                     id="btnLogout"
-                    className="hover:text-accent-light w-full rounded px-4 py-2 text-center text-xl hover:bg-primary-light"
+                    className="w-full rounded px-4 py-2 text-center text-xl hover:bg-primary-light hover:text-accent-light"
                     onClick={handleLogout}
                   >
                     Logout
