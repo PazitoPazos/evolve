@@ -7,8 +7,8 @@ interface CustomListProps {
 
 function CustomList({ title, icon, itemName, items }: CustomListProps) {
   return (
-    <div className="group h-fit w-80 border-2 border-solid border-white px-2 hover:cursor-pointer hover:bg-neutral-700">
-      <div className="mb-1 mr-1 flex items-center justify-between border-b-2 border-solid border-b-white text-xl">
+    <div className="group h-fit w-80 border-4 border-solid border-secondary-light px-2 hover:cursor-pointer hover:bg-primary">
+      <div className="mb-1 mr-1 flex items-center justify-between border-b-4 border-solid border-b-secondary-light text-xl">
         <div className="my-2">
           <h2>{title}</h2>
         </div>
@@ -31,7 +31,7 @@ function CustomList({ title, icon, itemName, items }: CustomListProps) {
           <li className="ml-5 list-disc">
             <input
               type="text"
-              className="border-none bg-neutral-800 outline-none group-hover:bg-zinc-700"
+              className="border-none bg-primary-dark outline-none group-hover:bg-primary"
               placeholder={'Add a new ' + itemName}
             />
           </li>

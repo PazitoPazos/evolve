@@ -6,8 +6,8 @@ import { getSession } from '@/lib/session'
 import { Providers } from '@/components/Providers'
 
 export const metadata: Metadata = {
-  title: 'Project SMWA',
-  description: 'Server Management Web App',
+  title: 'Evolve',
+  description: 'Minecraft Server Hosting',
 }
 
 export default async function RootLayout({
@@ -19,10 +19,10 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={'h-[94vh] ' + spaceMono.className}>
+      <body className={'h-screen bg-primary-dark ' + spaceMono.className}>
         <Providers session={session?.user}>
-          <NavbarTop />
-          <div className="mt-16 h-full">{children}</div>
+        <NavbarTop />
+        <div className="pt-16 h-full">{children}</div>
         </Providers>
       </body>
     </html>

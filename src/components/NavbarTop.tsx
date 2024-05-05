@@ -1,17 +1,24 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import LoginIcon from '@/icons/LoginIcon'
 import Link from 'next/link'
 import ChevronDownIcon from '@/icons/ChevronDownIcon'
 import { useAuth } from '@/hooks/useAuth'
 import ServerIcon from '@/icons/ServerIcon'
+import Image from 'next/image'
 
 function NavbarTop() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const router = useRouter()
   const { serverId } = useParams()
   const { session } = useAuth()
+
+  useEffect(() => {
+    if (!session) {
+      setIsDropdownOpen(false)
+    }
+  }, [session])
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState)
@@ -23,7 +30,7 @@ function NavbarTop() {
         method: 'POST',
       })
       if (response.ok) {
-        router.replace('/') // Redirige a la página de inicio u otra página
+        router.push('/') // Redirige a la página de inicio u otra página
       } else {
         console.error('Error al cerrar sesión:', response.statusText)
       }
@@ -33,46 +40,53 @@ function NavbarTop() {
   }
 
   return (
-    <div className="absolute left-0 top-0 flex h-16 w-full justify-between bg-indigo-500 px-4 text-center text-2xl">
-      <Link href={'/'} className="flex items-center">
-        <img src="/logo.svg" alt="Logo" className="mr-4 h-8" />
-        <span className="font-bold text-white">Evolve</span>
+    <div className="absolute left-0 top-0 flex h-16 w-full justify-between bg-primary text-center text-2xl text-accent">
+      <Link
+        href={'/'}
+        className="flex items-center gap-2 px-2"
+      >
+        <Image
+          src="/logo.png"
+          alt="Logo"
+          className="py-2"
+          height={64}
+          width={64}
+        />
       </Link>
-      {serverId && (
+      {serverId ? (
         <Link
           href={'/servers'}
-          className="flex items-center px-4 hover:bg-indigo-400 hover:text-neutral-100"
+          className="hover:text-accent-light flex items-center px-4 hover:bg-primary-light"
         >
           <ServerIcon />
-          <span className="ml-2 font-bold text-white">My servers</span>
+          <span className="ml-2 font-bold">My servers</span>
         </Link>
+      ) : (
+        <></>
       )}
-      <div className="relative flex items-center">
+      <div className="relative flex items-center px-4">
         {session ? (
           <button
             onClick={toggleDropdown}
-            className="flex items-center text-white focus:outline-none"
+            className="flex items-center focus:outline-none"
           >
             <span className="mr-2">{session.username}</span>
             <ChevronDownIcon />
           </button>
         ) : (
-          <Link
-            href="/login"
-            className="flex items-center text-white focus:outline-none"
-          >
+          <Link href="/login" className="flex items-center focus:outline-none">
             <span className="mr-2">Login</span>
             <LoginIcon />
           </Link>
         )}
         {isDropdownOpen && (
-          <div className="absolute right-0 top-full mt-2 w-48 rounded bg-white shadow-lg">
+          <div className="absolute right-0 top-full mr-3 mt-2 w-36 rounded bg-primary shadow-lg">
             {session ? (
-              <ul className="py-1">
+              <ul className="">
                 <li>
                   <button
                     id="btnLogout"
-                    className="block w-full px-4 py-2 text-center text-xl text-gray-800 hover:bg-indigo-100"
+                    className="hover:text-accent-light w-full rounded px-4 py-2 text-center text-xl hover:bg-primary-light"
                     onClick={handleLogout}
                   >
                     Logout

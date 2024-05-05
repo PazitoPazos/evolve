@@ -57,7 +57,7 @@ function NavbarLeft() {
     <>
       <div
         className={
-          'flex h-full max-h-screen flex-shrink-0 flex-col justify-between bg-indigo-500 text-white transition-all duration-300 ease-in-out ' +
+          'flex h-full max-h-screen flex-shrink-0 flex-col justify-between bg-primary text-accent transition-all duration-300 ease-in-out ' +
           (navbarOpen ? 'w-72' : 'w-[4.25rem]')
         }
       >
@@ -65,10 +65,10 @@ function NavbarLeft() {
           {serverLinks.map((link) => (
             <Link
               className={
-                'group flex items-center gap-2 px-4 py-4 text-2xl hover:bg-indigo-400 hover:text-neutral-100 ' +
-                (pathname.includes(link.path) ? 'bg-indigo-700 ' : '') +
+                'group flex items-center gap-2 px-4 py-4 text-2xl hover:bg-primary-light hover:text-accent-light ' +
+                (pathname.includes(link.path) ? 'bg-primary-dark ' : '') +
                 (pathname.includes(link.path) && !navbarOpen
-                  ? 'border-l-4 pl-3'
+                  ? 'border-l-4 border-l-secondary-light pl-3'
                   : '')
               }
               key={link.path}
@@ -92,10 +92,10 @@ function NavbarLeft() {
             </Link>
           ))}
         </div>
-        <div className="flex w-full flex-row-reverse p-4">
+        <div className="relative flex w-full flex-row-reverse p-4">
           <button
             className={
-              'transition duration-300 ease-in-out ' +
+              'absolute bottom-2 right-3 rounded-full p-2 transition duration-300 ease-in-out hover:bg-primary-light ' +
               (navbarOpen ? '' : 'rotate-180')
             }
             onClick={handleClick}

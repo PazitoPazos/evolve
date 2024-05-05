@@ -1,5 +1,6 @@
 'use client'
 import { useAuth } from '@/hooks/useAuth'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -27,7 +28,15 @@ function Header() {
   return (
     <header className="py-8 text-white">
       <div className="container mx-auto">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Evolve Hosting</h1>
+        <h1 className="mb-4 text-4xl font-bold">
+          Welcome to <span className='text-accent'>Evolve</span>
+        </h1>
+        <Image
+          src={'/logo.png'}
+          alt={'Evolve Logo'}
+          height={512}
+          width={512}
+        />
         <p className="mb-6 text-lg">
           Evolve Hosting provides top-notch hosting solutions for your Minecraft
           server. Whether you&apos;re a casual player or running a large-scale
@@ -77,8 +86,8 @@ function Pricing() {
 
 function Footer() {
   return (
-    <footer className="py-4 text-white">
-      <div className="container mx-auto">
+    <footer className="py-4 text-accent">
+      <div className="container mx-auto border-t-2 border-solid border-current">
         {/* Add footer content such as navigation links or contact information */}
       </div>
     </footer>

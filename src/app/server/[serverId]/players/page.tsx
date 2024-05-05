@@ -42,22 +42,22 @@ export default function Players() {
     '...',
   ]
   const bannedIPs = [
-    'IP 1',
-    'IP 2',
-    'IP 3',
-    'IP 4',
-    'IP 5',
-    'IP 6',
-    'IP 7',
-    'IP 8',
-    'IP 9',
+    '203.184.56.102',
+    '87.231.109.198',
+    '124.76.212.17',
+    '162.214.98.55',
+    '81.62.177.34',
+    '190.92.143.208',
+    '104.27.32.149',
+    '198.51.100.38',
+    '219.117.234.66',
     '...',
   ]
 
   return (
     <>
-      <div className="">
-        <h1 className="text-center text-4xl">Players</h1>
+      <div className="font-bold text-[#b2b2b2]">
+        <h1 className="text-center text-4xl text-accent">Players</h1>
         <div className="mt-4 grid grid-cols-2 gap-8">
           {/* //TODO: Add logic to open lists in the middle of screen */}
           <CustomList

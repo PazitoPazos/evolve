@@ -10,7 +10,7 @@ function ServerDetails({
   serverDetails: ServerDetailsData | null
 }) {
   return (
-    <div className="mt-4 box-border flex w-full items-center justify-between border-2 border-b-0 border-solid border-white px-4 py-0">
+    <div className="mt-4 box-border flex w-full items-center justify-between border-4 border-b-0 border-solid border-secondary-light px-4 py-0 text-[#b3b3b3]">
       <div className="flex items-center">
         <div className="h-32 w-32">
           <Image
@@ -24,7 +24,7 @@ function ServerDetails({
         <div className="mb-4 ml-4 mt-4 text-lg leading-6">
           <div className="group flex">
             <p className="">{serverDetails?.name}</p>
-            <p className="text-gray-400">#{serverDetails?.id}</p>
+            <p className="text-accent-dark">#{serverDetails?.id}</p>
             <div className="hidden hover:cursor-pointer group-hover:flex">
               <PencilIcon />
             </div>

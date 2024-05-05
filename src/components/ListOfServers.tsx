@@ -37,7 +37,7 @@ function ListOfServers() {
   }
 
   return (
-    <div className="mt-16 h-[48rem] w-[48rem] text-right">
+    <div className="mt-16 h-[48rem] w-[48rem] text-right text-[#b2b2b2]">
       <CustomButton
         id="create-server"
         value="+ Create a new server"
@@ -113,7 +113,7 @@ const FormDialog = ({ isOpen, onClose }: FormDialogProps) => {
 
   return (
     <dialog
-      className={`${isOpen ? 'fixed' : 'hidden'} inset-0 z-10 flex h-screen w-screen items-center justify-center overflow-y-auto bg-black bg-opacity-25`}
+      className={`${isOpen ? 'fixed' : 'hidden'} inset-0 z-10 flex h-screen w-screen items-center justify-center overflow-y-auto bg-primary bg-opacity-35 text-[#ddd]`}
       open={isOpen}
       onClose={onClose}
       onClick={(e) =>
@@ -121,11 +121,11 @@ const FormDialog = ({ isOpen, onClose }: FormDialogProps) => {
       }
     >
       <div className="flex items-center justify-center text-left">
-        <div className="w-96 rounded bg-neutral-800 shadow-lg">
-          <h2 className="flex justify-between rounded-t bg-indigo-500 p-4 text-lg font-bold text-white">
+        <div className="w-96 rounded bg-primary shadow-lg">
+          <h2 className="flex justify-between rounded-t bg-secondary-light p-4 text-lg font-bold">
             Crear servidor
             <button
-              className="text-white hover:text-gray-400 focus:outline-none"
+              className="hover:text-gray-400 focus:outline-none"
               onClick={onClose}
               aria-label="Cerrar"
             >
@@ -135,14 +135,11 @@ const FormDialog = ({ isOpen, onClose }: FormDialogProps) => {
 
           <form className="p-4" onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label
-                className="mb-2 block text-xl text-white"
-                htmlFor="serverName"
-              >
+              <label className="mb-2 block text-xl" htmlFor="serverName">
                 Nombre
               </label>
               <input
-                className="focus:shadow-outline w-full appearance-none rounded border bg-slate-300 px-3 py-2 text-lg leading-tight text-gray-700 shadow focus:outline-none"
+                className="focus:shadow-outline w-full appearance-none rounded border bg-primary-light px-3 py-2 text-lg leading-tight shadow focus:outline-none"
                 id="serverName"
                 type="text"
                 name="serverName"
@@ -152,14 +149,11 @@ const FormDialog = ({ isOpen, onClose }: FormDialogProps) => {
               />
             </div>
             <div className="mb-4">
-              <label
-                className="mb-2 block text-xl text-white"
-                htmlFor="serverDescription"
-              >
+              <label className="mb-2 block text-xl" htmlFor="serverDescription">
                 Descripción
               </label>
               <input
-                className="focus:shadow-outline w-full appearance-none rounded border bg-slate-300 px-3 py-2 text-lg leading-tight text-gray-700 shadow focus:outline-none"
+                className="focus:shadow-outline w-full appearance-none rounded border bg-primary-light px-3 py-2 text-lg leading-tight shadow focus:outline-none"
                 id="serverDescription"
                 type="text"
                 name="serverDescription"
@@ -170,7 +164,7 @@ const FormDialog = ({ isOpen, onClose }: FormDialogProps) => {
             </div>
             <div className="flex justify-end">
               <button
-                className="focus:shadow-outline rounded bg-indigo-500 px-4 py-2 text-lg font-bold text-white hover:bg-indigo-600 focus:outline-none"
+                className="focus:shadow-outline rounded bg-secondary-light px-4 py-2 text-lg font-bold hover:bg-secondary focus:outline-none"
                 type="submit"
               >
                 Crear

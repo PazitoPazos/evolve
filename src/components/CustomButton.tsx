@@ -18,7 +18,7 @@ function CustomButton({
   return (
     <div className="">
       <button
-        className="rounded bg-neutral-500 px-2 py-1 text-xl"
+        className="rounded bg-accent px-2 py-1 text-xl font-bold text-[#ddd] hover:bg-accent-dark"
         id={id}
         type={type}
         onClick={onClick}

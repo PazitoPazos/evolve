@@ -86,15 +86,15 @@ export default function Dashboard() {
   }, [serverUsage])
 
   return (
-    <div className="w-2/3">
-      <h1 className="text-center text-4xl">Dashboard</h1>
+    <div className="w-2/3 font-bold">
+      <h1 className="text-center text-4xl text-accent">Dashboard</h1>
 
       <ServerDetails serverDetails={serverDetails} />
 
       <StartStop />
 
       <div className="grid grid-cols-2 justify-items-center gap-8 text-lg">
-        <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
+        <div className="flex h-24 w-full items-center justify-between border-4 border-solid border-secondary-light px-4 text-[#b3b3b3]">
           <div className="">
             <p>CPU Usage</p>
           </div>
@@ -116,7 +116,7 @@ export default function Dashboard() {
                 y="52"
                 dominantBaseline="middle"
                 textAnchor="middle"
-                fill="white"
+                fill="currentColor"
                 fontSize={24}
               >
                 {serverUsage?.cpuUsage.toFixed(2) ?? 0}%
@@ -124,7 +124,7 @@ export default function Dashboard() {
             </svg>
           </div>
         </div>
-        <div className="flex h-24 w-full items-center justify-between border-2 border-solid border-white px-4">
+        <div className="flex h-24 w-full items-center justify-between border-4 border-solid border-secondary-light px-4 text-[#b3b3b3]">
           <div className="">
             <p>RAM Usage</p>
           </div>

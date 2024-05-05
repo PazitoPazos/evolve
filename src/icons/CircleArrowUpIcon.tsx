@@ -13,7 +13,7 @@ function CircleArrowUpIcon({
       height={height ?? '24'}
       viewBox="0 0 24 24"
       strokeWidth="2"
-      stroke="#00896F"
+      stroke="#1F6F3A"
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"

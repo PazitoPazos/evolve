@@ -37,7 +37,7 @@ function FormInput({
       <div className="mb-4 flex gap-2">
         {icon}
         <input
-          className="w-full text-lg rounded p-2 outline outline-1 outline-neutral-500 focus-visible:outline-2 focus-visible:outline-white"
+          className="w-full rounded p-2 text-lg outline outline-1 outline-neutral-500 focus-visible:outline-2 focus-visible:outline-white"
           id={id}
           name={inputName}
           type={inputType}

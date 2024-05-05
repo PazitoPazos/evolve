@@ -72,7 +72,7 @@ export default function SignUp() {
           <h1 className="mb-8 mt-4 text-4xl">Register</h1>
         </div>
         <form
-          className="w-1/4 border-2 border-solid border-white p-4"
+          className="w-1/4 border-2 border-solid border-current p-4"
           onSubmit={handleSubmit}
         >
           <FormInput
@@ -117,7 +117,10 @@ export default function SignUp() {
         <br />
         <p className="mt-2 text-xl">
           Do you have an account?{' '}
-          <Link className="border-b-2 border-solid" href="/login">
+          <Link
+            className="border-b-2 border-solid border-current"
+            href="/login"
+          >
             Go to login
           </Link>
         </p>

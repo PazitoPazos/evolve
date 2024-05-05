@@ -39,12 +39,12 @@ export default function About() {
 
   return (
     <>
-      <div className="w-2/3">
-        <h1 className="text-center text-4xl">Log</h1>
-        <div className="mt-4 flex flex-col border-2">
-          <div className="flex items-center justify-end border-b-2 p-2">
+      <div className="w-2/3 font-bold">
+        <h1 className="text-center text-4xl text-accent">Log</h1>
+        <div className="mt-4 flex flex-col border-4 border-secondary-light text-[#b3b3b3]">
+          <div className="flex items-center justify-end border-b-4 border-secondary-light p-2">
             <Link
-              className="w-fit rounded bg-neutral-500 px-2 py-1 text-lg"
+              className="w-fit rounded bg-accent px-2 py-1 text-lg text-[#ddd] hover:bg-accent-dark"
               href={'console'}
             >
               Go to console -&gt;

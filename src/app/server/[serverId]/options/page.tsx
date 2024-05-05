@@ -26,18 +26,18 @@ export default function Options() {
   // const resourcePackUrlOptions = { optionId: 'resource-pack-url', optionDesc: 'Resource Pack URL', optionKey: 'resource-pack-url', optionValue: '' }
   return (
     <>
-      <div className="w-2/3">
-        <h1 className="text-center text-4xl">Options</h1>
-        <div className="mt-4 flex min-w-96 flex-col border-2 border-solid border-white p-4">
+      <div className="w-2/3 font-bold">
+        <h1 className="text-center text-4xl text-accent">Options</h1>
+        <div className="mt-4 flex min-w-96 flex-col border-4 border-solid border-secondary-light p-4">
           <div className="flex items-center text-2xl">
-            <div className="">
+            <div className="text-accent">
               <FileSettingsIcon />
             </div>
-            <div className="">
+            <div className="text-accent">
               <p>server.properties</p>
             </div>
           </div>
-          <div className="mt-4 grid h-[40rem] grid-cols-2 gap-8 overflow-auto">
+          <div className="mt-4 grid h-[40rem] grid-cols-2 gap-8 overflow-auto text-secondary-light">
             <OptionNumber
               optionId="max-players"
               optionDesc="Max Players"

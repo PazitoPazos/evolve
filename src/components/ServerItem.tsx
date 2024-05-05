@@ -5,9 +5,9 @@ function ServerItem({ server }: { server: ServerItemData }) {
   return (
     <Link
       href={`/server/${server.id}/dashboard`}
-      className="flex w-full cursor-pointer justify-between border-2 border-solid border-white px-4 py-0 hover:bg-neutral-700"
+      className="flex w-full cursor-pointer justify-between border-4 border-solid border-secondary-light px-4 py-0 font-bold hover:bg-primary"
     >
-      <div className="flex items-center text-lg">
+      <div className="flex items-center text-xl">
         <div className="">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="h-32 w-32" src={server.icon} alt="server-icon" />
@@ -16,7 +16,7 @@ function ServerItem({ server }: { server: ServerItemData }) {
           <div className="">
             <p>{server.name}</p>
           </div>
-          <div className="text-gray-400">
+          <div className="text-accent-dark">
             <p>#{server.id}</p>
           </div>
           <div className="">
