@@ -49,21 +49,13 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex h-full flex-col items-center justify-center text-center">
+      <div className="flex h-full flex-col items-center justify-center text-center font-bold text-[#b2b2b2]">
         <div className="w-full">
-          <Link className="flex items-center justify-center" href="/">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className="aspect-square w-16"
-              src="https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg"
-              alt="Logo"
-            />
-          </Link>
-          <h1 className="mb-8 mt-4 text-4xl">Login</h1>
+          <h1 className="mb-8 mt-4 text-4xl text-accent">Login</h1>
         </div>
         <form
           onSubmit={handleSubmit}
-          className="w-1/4 border-2 border-solid border-white p-4"
+          className="w-1/4 border-4 border-solid border-secondary-light p-4"
         >
           <FormInput
             id="usernameInput"
@@ -85,7 +77,10 @@ export default function Login() {
         <br />
         <p className="mt-2 text-xl">
           Don&apos;t have an account?{' '}
-          <Link className="border-b-2 border-solid" href="/register">
+          <Link
+            className="border-b-2 border-solid border-current"
+            href="/register"
+          >
             Go to register
           </Link>
         </p>

@@ -26,7 +26,7 @@ function FormInput({
   onChange = undefined,
 }: FormInputProps) {
   return (
-    <div className="text-xl">
+    <div className="text-xl text-[#b2b2b2]">
       {label ? (
         <label className="mb-2 block text-left capitalize" htmlFor={inputName}>
           {removeDash(inputName)}
@@ -34,10 +34,10 @@ function FormInput({
       ) : (
         <></>
       )}
-      <div className="mb-4 flex gap-2">
+      <div className="mb-4 flex items-center gap-2">
         {icon}
         <input
-          className="w-full rounded p-2 text-lg outline outline-1 outline-neutral-500 focus-visible:outline-2 focus-visible:outline-white"
+          className="w-full rounded p-2 text-lg outline outline-2 outline-primary focus-visible:outline-2 focus-visible:outline-primary-light"
           id={id}
           name={inputName}
           type={inputType}

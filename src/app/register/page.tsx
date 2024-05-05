@@ -59,20 +59,12 @@ export default function SignUp() {
 
   return (
     <>
-      <div className="flex h-full flex-col items-center justify-center text-center">
+      <div className="flex h-full flex-col items-center justify-center text-center font-bold text-[#b2b2b2]">
         <div className="w-full">
-          <Link className="flex items-center justify-center" href="/">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className="aspect-square w-16"
-              src="https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg"
-              alt="Logo"
-            />
-          </Link>
-          <h1 className="mb-8 mt-4 text-4xl">Register</h1>
+          <h1 className="mb-8 mt-4 text-4xl text-accent">Register</h1>
         </div>
         <form
-          className="w-1/4 border-2 border-solid border-current p-4"
+          className="w-1/4 border-4 border-solid border-secondary-light p-4"
           onSubmit={handleSubmit}
         >
           <FormInput
