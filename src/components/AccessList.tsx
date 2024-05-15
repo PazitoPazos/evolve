@@ -53,7 +53,7 @@ function AccessList() {
   ]
 
   return (
-    <div className="mt-4 grid grid-cols-4 gap-8">
+    <div className="mt-4 grid grid-cols-2 gap-2 md:gap-8 overflow-auto md:grid-cols-4">
       {userList.map((user) => (
         <AccessUser key={user.id} user={user} />
       ))}

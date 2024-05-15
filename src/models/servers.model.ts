@@ -6,8 +6,8 @@ export interface Server {
   id: string
   name: string
   description: string
-  dnsname: string
-  port: number
+  icon: string
+  version: string
 }
 
 // Convierte un resultado de fila de la base de datos en un objeto de usuario
@@ -16,7 +16,7 @@ export const parseServer = (row: RowDataPacket): Server => {
     id: row.id,
     name: row.name,
     description: row.description,
-    dnsname: row.dnsname,
-    port: row.port,
+    icon: row.icon,
+    version: row.version,
   }
 }

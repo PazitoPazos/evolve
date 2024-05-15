@@ -40,14 +40,14 @@ function NavbarTop() {
   }
 
   return (
-    <div className="absolute left-0 top-0 flex h-16 w-full justify-between bg-primary text-center text-2xl text-accent">
+    <div className="fixed left-0 top-0 z-10 flex h-20 w-full justify-between bg-primary text-center text-xl text-accent lg:text-2xl">
       <Link href={'/'} className="flex items-center gap-2 px-2">
         <Image
           src="/logo.png"
           alt="Logo"
           className="py-2"
-          height={64}
-          width={64}
+          height={80}
+          width={80}
         />
       </Link>
       {serverId ? (
@@ -56,7 +56,7 @@ function NavbarTop() {
           className="flex items-center px-4 hover:bg-primary-light hover:text-accent-light"
         >
           <ServerIcon />
-          <span className="ml-2 font-bold">My servers</span>
+          <span className="ml-2 hidden md:inline font-bold">My servers</span>
         </Link>
       ) : (
         <></>

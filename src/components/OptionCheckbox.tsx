@@ -22,7 +22,7 @@ function OptionCheckbox({
 
   return (
     <div className="text-[#b3b3b3]">
-      <div className="flex flex-grow flex-wrap items-center justify-between border-4 border-solid border-secondary-light px-3 py-3 text-xl">
+      <div className="flex flex-grow flex-wrap items-center gap-4 border-4 border-solid border-secondary-light px-3 py-3 text-lg md:justify-between md:gap-0 md:text-xl">
         <div className="">
           <label htmlFor={optionId}>{optionDesc}</label>
         </div>

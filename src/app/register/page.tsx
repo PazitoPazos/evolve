@@ -61,10 +61,12 @@ export default function SignUp() {
     <>
       <div className="flex h-full flex-col items-center justify-center text-center font-bold text-[#b2b2b2]">
         <div className="w-full">
-          <h1 className="mb-8 mt-4 text-4xl text-accent">Register</h1>
+          <h1 className="mb-8 mt-4 text-2xl text-accent md:text-4xl">
+            Register
+          </h1>
         </div>
         <form
-          className="w-1/4 border-4 border-solid border-secondary-light p-4"
+          className="border-4 border-solid border-secondary-light p-4 md:w-1/2 lg:w-1/3 2xl:w-1/4"
           onSubmit={handleSubmit}
         >
           <FormInput
@@ -107,7 +109,7 @@ export default function SignUp() {
           <CustomButton id="sign-up-button" type="submit" value="Register" />
         </form>
         <br />
-        <p className="mt-2 text-xl">
+        <p className="mt-2 md:text-xl">
           Do you have an account?{' '}
           <Link
             className="border-b-2 border-solid border-current"

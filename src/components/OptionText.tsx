@@ -21,8 +21,8 @@ function OptionText({
   }
 
   return (
-    <div className="col-span-2 text-[#b3b3b3]">
-      <div className="flex flex-grow flex-wrap items-center justify-between border-4 border-solid border-secondary-light px-3 py-3 text-xl">
+    <div className="text-[#b3b3b3] md:col-span-2">
+      <div className="flex flex-grow flex-wrap items-center gap-4 border-4 border-solid border-secondary-light px-3 py-3 text-lg md:justify-between md:gap-0 md:text-xl">
         <label htmlFor={optionId}>{optionDesc}</label>
         <input
           className="w-3/4 rounded bg-primary-light px-1 text-lg"

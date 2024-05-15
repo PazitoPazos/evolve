@@ -1,6 +1,6 @@
 'use client'
 
-import { ButtonHTMLAttributes, MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react'
 
 interface CustomButtonProps {
   id: string
@@ -18,7 +18,7 @@ function CustomButton({
   return (
     <div className="">
       <button
-        className="rounded bg-accent px-2 py-1 text-xl font-bold text-[#ddd] hover:bg-accent-dark"
+        className="rounded bg-accent px-2 py-1 font-bold text-[#ddd] hover:bg-accent-dark md:text-xl"
         id={id}
         type={type}
         onClick={onClick}

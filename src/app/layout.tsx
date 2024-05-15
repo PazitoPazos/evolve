@@ -19,10 +19,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={'h-screen bg-primary-dark ' + spaceMono.className}>
+      <body
+        className={'h-screen bg-primary-dark ' + spaceMono.className}
+      >
         <Providers session={session?.user}>
-        <NavbarTop />
-        <div className="pt-16 h-full">{children}</div>
+          <NavbarTop />
+          <div className="h-full w-full pt-20">{children}</div>
         </Providers>
       </body>
     </html>

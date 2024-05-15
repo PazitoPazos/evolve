@@ -56,9 +56,11 @@ export default function Players() {
 
   return (
     <>
-      <div className="font-bold text-[#b2b2b2]">
-        <h1 className="text-center text-4xl text-accent">Players</h1>
-        <div className="mt-4 grid grid-cols-2 gap-8">
+      <div className="overflow-auto pt-4 font-bold text-[#b2b2b2]">
+        <h1 className="text-center text-2xl text-accent md:text-4xl">
+          Players
+        </h1>
+        <div className="mt-4 grid gap-4 md:grid-cols-2 md:gap-8">
           {/* //TODO: Add logic to open lists in the middle of screen */}
           <CustomList
             title="Whitelist"

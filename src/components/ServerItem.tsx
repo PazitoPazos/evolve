@@ -7,10 +7,10 @@ function ServerItem({ server }: { server: ServerItemData }) {
       href={`/server/${server.id}/dashboard`}
       className="flex w-full cursor-pointer justify-between border-4 border-solid border-secondary-light px-4 py-0 font-bold hover:bg-primary"
     >
-      <div className="flex items-center text-xl">
+      <div className="flex items-center md:text-xl">
         <div className="">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="h-32 w-32" src={server.icon} alt="server-icon" />
+          <img className="w-32 md:h-32" src={server.icon} alt="server-icon" />
         </div>
         <div className="mb-2 ml-3 mt-2 text-left leading-5">
           <div className="">

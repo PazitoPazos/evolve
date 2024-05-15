@@ -37,13 +37,13 @@ function ListOfServers() {
   }
 
   return (
-    <div className="mt-16 h-[48rem] w-[48rem] text-right text-[#b2b2b2]">
-      <CustomButton
+    <div className="mt-16 text-right text-[#b2b2b2] md:h-[48rem] lg:w-[48rem]">
+      {/* <CustomButton
         id="create-server"
         value="+ Create a new server"
         onClick={handleOpenDialog}
       />
-      <FormDialog isOpen={isOpen} onClose={handleCloseDialog} />
+      <FormDialog isOpen={isOpen} onClose={handleCloseDialog} /> */}
       <div className="mt-4 flex h-2/3 flex-col">
         {servers.length > 0 ? (
           servers?.map((server) => (
@@ -51,7 +51,7 @@ function ListOfServers() {
           ))
         ) : (
           <>
-            <span className="mt-16 text-center text-2xl">
+            <span className="mt-16 text-center lg:text-2xl">
               No tienes servidores aún
             </span>
           </>

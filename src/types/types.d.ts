@@ -1,5 +1,15 @@
 import { RowDataPacket } from 'mysql2'
 
+export interface Plan {
+  ram: string
+  players: string
+  vCPUs: string
+  storage: string
+  numBackups: string
+  ads: string
+  price: string
+}
+
 export interface FormDialogProps {
   isOpen: boolean
   onClose: () => void

@@ -54,12 +54,14 @@ export default function Console() {
 
   return (
     <>
-      <div className="w-2/3 font-bold">
-        <h1 className="text-center text-4xl text-accent">Console</h1>
+      <div className="overflow-auto py-4 font-bold md:w-2/3 md:py-0">
+        <h1 className="text-center text-2xl text-accent md:text-4xl">
+          Console
+        </h1>
         <div className="mt-4 flex flex-col border-4 border-secondary-light text-[#b3b3b3]">
           <div className="flex items-center justify-end border-b-4 border-secondary-light p-2">
             <Link
-              className="w-fit rounded bg-accent px-2 py-1 text-lg text-[#ddd] hover:bg-accent-dark"
+              className="w-fit rounded bg-accent px-2 py-1 text-[#ddd] hover:bg-accent-dark md:text-lg"
               href={'log'}
             >
               Go to log -&gt;
@@ -67,7 +69,7 @@ export default function Console() {
           </div>
           {consoleLines ? (
             <>
-              <div className="flex h-[32rem] flex-col-reverse overflow-y-auto p-2">
+              <div className="flex h-[32rem] flex-col-reverse overflow-y-auto p-2 text-xs md:text-lg">
                 <ul>
                   {consoleLines.map((l, i) => {
                     let spl = l.split(': ')
@@ -130,7 +132,7 @@ export default function Console() {
                     <path d="M13 14l-2 2" />
                     <path d="M16 16l4 4" />
                   </svg>
-                  <p className="text-3xl">Desconectado</p>
+                  <p className="text-xl md:text-3xl">Desconectado</p>
                 </div>
               </div>
             </>

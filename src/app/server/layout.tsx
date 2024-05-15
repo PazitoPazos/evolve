@@ -8,7 +8,7 @@ export default function ServerLayout({
   return (
     <div className="flex h-full">
       <NavbarLeft />
-      <div className="flex h-full w-full flex-1 flex-col items-center justify-center">
+      <div className="flex h-full w-full flex-col items-center justify-center">
         {children}
       </div>
     </div>

@@ -39,19 +39,19 @@ export default function About() {
 
   return (
     <>
-      <div className="w-2/3 font-bold">
-        <h1 className="text-center text-4xl text-accent">Log</h1>
+      <div className="overflow-auto py-4 font-bold md:w-2/3 md:py-0">
+        <h1 className="text-center text-2xl text-accent md:text-4xl">Log</h1>
         <div className="mt-4 flex flex-col border-4 border-secondary-light text-[#b3b3b3]">
           <div className="flex items-center justify-end border-b-4 border-secondary-light p-2">
             <Link
-              className="w-fit rounded bg-accent px-2 py-1 text-lg text-[#ddd] hover:bg-accent-dark"
+              className="w-fit rounded bg-accent px-2 py-1 text-[#ddd] hover:bg-accent-dark md:text-lg"
               href={'console'}
             >
               Go to console -&gt;
             </Link>
           </div>
           {logLines ? (
-            <div className="h-[32rem] overflow-y-auto p-2">
+            <div className="h-[32rem] w-64 md:w-full overflow-y-auto text-nowrap p-2 text-xs md:text-lg">
               <ul>
                 {logLines.map((l, i) => {
                   let spl = l.split(': ')
@@ -96,7 +96,7 @@ export default function About() {
                   <path d="M3 3l18 18" />
                   <path d="M7 3h7l5 5v7m0 4a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-14" />
                 </svg>
-                <p className="text-3xl">No hay registro</p>
+                <p className="text-xl md:text-3xl">No hay registro</p>
               </div>
             </div>
           )}
