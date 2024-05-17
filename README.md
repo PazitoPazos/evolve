@@ -5,7 +5,9 @@ Fullstack application to manage Minecraft servers using NextJS with TypeScript a
 ## Tech Stack
 
 🔹 [NextJS](https://nextjs.org/)
+
 🔹 [Websockets](https://developer.mozilla.org/es/docs/Web/API/WebSockets_API)
+
 🔹 [TailwindCSS](https://tailwindcss.com/)
 
 ## Setup
