@@ -44,7 +44,7 @@ function ListOfServers() {
         onClick={handleOpenDialog}
       />
       <FormDialog isOpen={isOpen} onClose={handleCloseDialog} /> */}
-      <div className="mt-4 flex h-2/3 flex-col">
+      <div className="mt-4 flex gap-6 h-2/3 flex-col">
         {servers.length > 0 ? (
           servers?.map((server) => (
             <ServerItem key={server.id} server={server} />
