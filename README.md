@@ -29,6 +29,17 @@ Fullstack application to manage Minecraft servers using NextJS with TypeScript a
     ```bash
     npm install
     ```
+4. Create database schema using `schema.sql` in `src/sql/` and execute it on your MySQL Server.
+
+5. Edit your `.env` file with your own configuration:
+    ```bash
+    DB_HOST=YOUR_DB_HOST
+    DB_PORT=YOUR_DB_PORT
+    DB_USER=YOUR_DB_USER
+    DB_PASS=TOUR_DB_PASSWORD
+    DB_NAME=TOUR_DB_NAME
+    SESSION_SECRET=YOUR_SECRET_KEY_SESSION
+    ```
 
 ## Start the app locally
 
