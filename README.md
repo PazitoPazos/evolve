@@ -36,8 +36,8 @@ Fullstack application to manage Minecraft servers using NextJS with TypeScript a
     DB_HOST=YOUR_DB_HOST
     DB_PORT=YOUR_DB_PORT
     DB_USER=YOUR_DB_USER
-    DB_PASS=TOUR_DB_PASSWORD
-    DB_NAME=TOUR_DB_NAME
+    DB_PASS=YOUR_DB_PASSWORD
+    DB_NAME=YOUR_DB_NAME
     SESSION_SECRET=YOUR_SECRET_KEY_SESSION
     ```
 
