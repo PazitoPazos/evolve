@@ -1,6 +1,11 @@
 # Evolve
 
-Fullstack application to manage Minecraft servers using NextJS with TypeScript and Websocket.
+This repository is part of the Evolve project. This repo contains the fullstack application to manage Minecraft servers using NextJS with TypeScript and Websocket.
+
+## Related repos
+ - [Evolve Middleware](https://github.com/PazitoPazos/evolve-middleware)
+ - [Evolve API](https://github.com/PazitoPazos/evolve-api)
+ - [Evolve Vagrant](https://github.com/PazitoPazos/evolve-vagrant)
 
 ## Tech Stack
 
