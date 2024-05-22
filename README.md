@@ -47,6 +47,7 @@ To run this API, you will need to have the following installed on your system:
 4. Create database schema using `schema.sql` in `src/sql/` and execute it on your MySQL Server.
 
 5. Edit your `.env` file with your own configuration:
+
     ```bash
     DB_HOST=YOUR_DB_HOST
     DB_PORT=YOUR_DB_PORT
@@ -54,6 +55,13 @@ To run this API, you will need to have the following installed on your system:
     DB_PASS=YOUR_DB_PASSWORD
     DB_NAME=YOUR_DB_NAME
     SESSION_SECRET=YOUR_SECRET_KEY_SESSION
+    ```
+
+6. Use the `test` user for try the application:
+
+    ```bash
+    User: test
+    Passord: abc123.
     ```
 
 ## Start the app locally
