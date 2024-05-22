@@ -16,6 +16,14 @@ This repository is part of the Evolve project. This repo contains the fullstack 
 
 🔹 [TailwindCSS](https://tailwindcss.com/)
 
+## Requirements
+
+To run this API, you will need to have the following installed on your system:
+
+- NodeJS 20+
+- `ws` package
+
+
 ## Setup
 
 1. Clone this repository on your local machine:
