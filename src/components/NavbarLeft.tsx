@@ -57,7 +57,7 @@ function NavbarLeft() {
     <>
       <div
         className={
-          'flex h-full max-h-screen flex-shrink-0 flex-col justify-between bg-primary text-accent transition-all duration-300 ease-in-out ' +
+          'flex h-full max-h-screen flex-shrink-0 flex-col justify-between bg-primary text-accent font-bold transition-all duration-300 ease-in-out ' +
           (navbarOpen ? 'w-72' : 'w-[4.25rem]')
         }
       >
