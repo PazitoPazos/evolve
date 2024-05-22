@@ -35,6 +35,6 @@ CREATE DATABASE `evolve` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_
   		CONSTRAINT `fk_users_servers_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
-INSERT INTO users(id, username, email, password, status) VALUES('beb5bcb7-bc98-4c6f-8afd-386644caaadb', 'test', 'test@evolve.com', '$2b$10$T5tkzqR7qU/lpHF/FUzFueM1tpZ./qO7ze5RwoZm38knkA/yAO8M.', '0');
+INSERT INTO users(id, username, email, password, status) VALUES('beb5bcb7-bc98-4c6f-8afd-386644caaadb', 'test', 'test@evolve.com', '$2b$10$idqQP8krJK8riZYmTwww/.6dg7qG2dT.zbUZJs5ZOOlIpL0j0YqCS', '0');
 INSERT INTO servers VALUES('85677314-3cb5-480b-a641-137cafc508fa', 'Test Server', 'Example server', '/mcserver-logo.png', 'Paper 1.20.4');
 INSERT INTO users_servers VALUES('d078157d-f847-42a8-ab1f-722eb900c871', 'beb5bcb7-bc98-4c6f-8afd-386644caaadb', '85677314-3cb5-480b-a641-137cafc508fa' , 1);
