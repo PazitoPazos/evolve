@@ -20,6 +20,7 @@ This repository is part of the Evolve project. This repo contains the fullstack 
 
 To run this API, you will need to have the following installed on your system:
 
+- MySQL Server
 - NodeJS 20+
 - `ws` package
 
