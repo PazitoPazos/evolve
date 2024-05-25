@@ -71,13 +71,13 @@ function Features() {
 
   const features = [
     {
-      description: `Stay informed and in control with live statistics at your fingertips. Evolve keeps you up to date on key metrics such as CPU usage and RAM usage. It's an intuitive way to monitor your game world's performance and manage resources effectively.`,
+      description: 'Stay informed and in control with live statistics at your fingertips. Evolve keeps you up to date on key metrics such as CPU usage and RAM usage. It\'s an intuitive way to monitor your game world\'s performance and manage resources effectively.',
       image: { src: '/dashboard.png', alt: 'Dashboard page' },
       icon: <DashboardIcon height={'36'} width={'36'} />,
       text: 'Dashboard',
     },
     {
-      description: `Enjoy absolute simplicity when customizing your game. Change game settings effortlessly, no files, no fuss - all thanks to Evolve's easy-to-use interface`,
+      description: 'Enjoy absolute simplicity when customizing your game. Change game settings effortlessly, no files, no fuss - all thanks to Evolve\'s easy-to-use interface',
       image: { src: '/options.png', alt: 'Options page' },
       icon: <AdjustmentsHorizontalIcon height={'36'} width={'36'} />,
       text: 'Options',
@@ -90,19 +90,19 @@ function Features() {
       text: 'Console',
     },
     {
-      description: `Your server log provides a detailed record of activities and events on your hosting environment. It tracks requests, errors, and other important information to help you monitor the performance and security of your website. With this log, you can quickly troubleshoot issues, identify trends, and optimize your hosting setup for better reliability and performance.`,
+      description: 'Your server log provides a detailed record of activities and events on your hosting environment. It tracks requests, errors, and other important information to help you monitor the performance and security of your website. With this log, you can quickly troubleshoot issues, identify trends, and optimize your hosting setup for better reliability and performance.',
       image: { src: '/log.png', alt: 'Log page' },
       icon: <FileReportIcon height={'36'} width={'36'} />,
       text: 'Log',
     },
     {
-      description: `Here, you can whitelist specific players, grant operator privileges to trusted users, maintain a list of banned players, and block problematic IP addresses. Whether you're safeguarding against unwanted intrusions, enforcing server rules, or fostering a positive community atmosphere, our tools empower you to create and maintain the ideal gaming environment for your server`,
+      description: 'Here, you can whitelist specific players, grant operator privileges to trusted users, maintain a list of banned players, and block problematic IP addresses. Whether you\'re safeguarding against unwanted intrusions, enforcing server rules, or fostering a positive community atmosphere, our tools empower you to create and maintain the ideal gaming environment for your server',
       image: { src: '/players.png', alt: 'Players page' },
       icon: <UsersIcon height={'36'} width={'36'} />,
       text: 'Players',
     },
     {
-      description: `Enhance your gaming experience by sharing power. With Evolve, you can delegate server administration access to your loyal players. It's a perfect way to collaborate, ensuring your thriving game world, even when you're offline.`,
+      description: 'Enhance your gaming experience by sharing power. With Evolve, you can delegate server administration access to your loyal players. It\'s a perfect way to collaborate, ensuring your thriving game world, even when you\'re offline.',
       image: { src: '/access.png', alt: 'Access page' },
       icon: <UserShieldIcon height={'36'} width={'36'} />,
       text: 'Access',

@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 
     // Insertar el nuevo usuario en la base de datos con la contraseña encriptada
     await connection.execute(
-       `INSERT INTO users (id, username, email, password) VALUES ('${userId}', ?, ?, ?)`,
+      `INSERT INTO users (id, username, email, password) VALUES ('${userId}', ?, ?, ?)`,
       [username, email, hashedPassword]
     )
 

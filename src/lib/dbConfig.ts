@@ -10,9 +10,17 @@ const mysqlConfig: mysql.ConnectionOptions = {
 }
 
 // Verificar si todas las variables de entorno necesarias están definidas
-if (!mysqlConfig.host || !mysqlConfig.port || !mysqlConfig.user || !mysqlConfig.password || !mysqlConfig.database) {
-  console.error("Faltan algunas variables de entorno necesarias para la configuración de la base de datos.");
-  process.exit(1); // Salir del proceso con un código de error
+if (
+  !mysqlConfig.host ||
+  !mysqlConfig.port ||
+  !mysqlConfig.user ||
+  !mysqlConfig.password ||
+  !mysqlConfig.database
+) {
+  console.error(
+    'Faltan algunas variables de entorno necesarias para la configuración de la base de datos.'
+  )
+  process.exit(1) // Salir del proceso con un código de error
 }
 
 // Función para conectar a la base de datos
