@@ -71,13 +71,15 @@ function Features() {
 
   const features = [
     {
-      description: 'Stay informed and in control with live statistics at your fingertips. Evolve keeps you up to date on key metrics such as CPU usage and RAM usage. It\'s an intuitive way to monitor your game world\'s performance and manage resources effectively.',
+      description:
+        "Stay informed and in control with live statistics at your fingertips. Evolve keeps you up to date on key metrics such as CPU usage and RAM usage. It's an intuitive way to monitor your game world's performance and manage resources effectively.",
       image: { src: '/dashboard.png', alt: 'Dashboard page' },
       icon: <DashboardIcon height={'36'} width={'36'} />,
       text: 'Dashboard',
     },
     {
-      description: 'Enjoy absolute simplicity when customizing your game. Change game settings effortlessly, no files, no fuss - all thanks to Evolve\'s easy-to-use interface',
+      description:
+        "Enjoy absolute simplicity when customizing your game. Change game settings effortlessly, no files, no fuss - all thanks to Evolve's easy-to-use interface",
       image: { src: '/options.png', alt: 'Options page' },
       icon: <AdjustmentsHorizontalIcon height={'36'} width={'36'} />,
       text: 'Options',
@@ -90,19 +92,22 @@ function Features() {
       text: 'Console',
     },
     {
-      description: 'Your server log provides a detailed record of activities and events on your hosting environment. It tracks requests, errors, and other important information to help you monitor the performance and security of your website. With this log, you can quickly troubleshoot issues, identify trends, and optimize your hosting setup for better reliability and performance.',
+      description:
+        'Your server log provides a detailed record of activities and events on your hosting environment. It tracks requests, errors, and other important information to help you monitor the performance and security of your website. With this log, you can quickly troubleshoot issues, identify trends, and optimize your hosting setup for better reliability and performance.',
       image: { src: '/log.png', alt: 'Log page' },
       icon: <FileReportIcon height={'36'} width={'36'} />,
       text: 'Log',
     },
     {
-      description: 'Here, you can whitelist specific players, grant operator privileges to trusted users, maintain a list of banned players, and block problematic IP addresses. Whether you\'re safeguarding against unwanted intrusions, enforcing server rules, or fostering a positive community atmosphere, our tools empower you to create and maintain the ideal gaming environment for your server',
+      description:
+        "Here, you can whitelist specific players, grant operator privileges to trusted users, maintain a list of banned players, and block problematic IP addresses. Whether you're safeguarding against unwanted intrusions, enforcing server rules, or fostering a positive community atmosphere, our tools empower you to create and maintain the ideal gaming environment for your server",
       image: { src: '/players.png', alt: 'Players page' },
       icon: <UsersIcon height={'36'} width={'36'} />,
       text: 'Players',
     },
     {
-      description: 'Enhance your gaming experience by sharing power. With Evolve, you can delegate server administration access to your loyal players. It\'s a perfect way to collaborate, ensuring your thriving game world, even when you\'re offline.',
+      description:
+        "Enhance your gaming experience by sharing power. With Evolve, you can delegate server administration access to your loyal players. It's a perfect way to collaborate, ensuring your thriving game world, even when you're offline.",
       image: { src: '/access.png', alt: 'Access page' },
       icon: <UserShieldIcon height={'36'} width={'36'} />,
       text: 'Access',
@@ -194,6 +199,7 @@ function Features() {
 function Pricing() {
   const plans: Plan[] = [
     {
+      name: 'Dirt',
       ram: '2GB',
       players: '1-4',
       vCPUs: '2',
@@ -203,6 +209,7 @@ function Pricing() {
       price: 'Free',
     },
     {
+      name: 'Wood',
       ram: '4GB',
       players: '4-16',
       vCPUs: '4',
@@ -212,6 +219,7 @@ function Pricing() {
       price: '20€/month',
     },
     {
+      name: 'Stone',
       ram: '6GB',
       players: '16-48',
       vCPUs: '6',
@@ -221,6 +229,7 @@ function Pricing() {
       price: '30€/month',
     },
     {
+      name: 'Copper',
       ram: '8GB',
       players: '48-80',
       vCPUs: '8',
@@ -230,6 +239,7 @@ function Pricing() {
       price: '40€/month',
     },
     {
+      name: 'Iron',
       ram: '10GB',
       players: '80-124',
       vCPUs: '10',
@@ -239,6 +249,7 @@ function Pricing() {
       price: '50€/month',
     },
     {
+      name: 'Gold',
       ram: '12GB',
       players: '124-192',
       vCPUs: '12',
@@ -248,6 +259,7 @@ function Pricing() {
       price: '60€/month',
     },
     {
+      name: 'Diamond',
       ram: '14GB',
       players: '192-256',
       vCPUs: '14',
@@ -257,6 +269,7 @@ function Pricing() {
       price: '70€/month',
     },
     {
+      name: 'Netherite',
       ram: '16GB',
       players: '256-512',
       vCPUs: '16',
@@ -269,11 +282,11 @@ function Pricing() {
 
   return (
     <section className="py-8">
-      <div className="container">
-        <h2 className="mb-8 text-4xl font-bold text-accent lg:text-6xl">
-          Pricing
-        </h2>
-        <div className="flex snap-x snap-mandatory gap-4 overflow-auto pt-4 sm:grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      <h2 className="mb-8 text-4xl font-bold text-accent lg:text-6xl">
+        Pricing
+      </h2>
+      <div className="flex justify-center">
+        <div className="flex snap-x snap-mandatory justify-center gap-4 overflow-auto pt-4 sm:grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {plans.map((plan, index) => (
             <PlanCard key={index} plan={plan} />
           ))}
@@ -296,12 +309,13 @@ function Footer() {
 const PlanCard: React.FC<{ plan: Plan }> = ({ plan }) => {
   return (
     <>
-      <div className="relative mb-4 flex min-w-80 snap-center flex-col rounded-lg border-4 border-accent bg-primary p-6 font-bold shadow-lg sm:min-w-64 lg:text-lg">
-        <h2 className="absolute -top-5 left-1/2 mb-2 min-w-36 -translate-x-1/2 transform bg-gradient-to-b from-primary-dark to-primary px-3 text-center text-2xl text-[#ddd]">
-          {plan.ram} RAM
+      <div className="relative mb-4 flex min-w-80 snap-center flex-col rounded-lg border-4 border-secondary-light bg-primary p-6 font-bold shadow-lg sm:min-w-64 md:min-w-80 lg:text-lg">
+        <h2 className="absolute -top-5 left-1/2 mb-2 min-w-36 -translate-x-1/2 transform bg-gradient-to-b from-primary-dark to-primary px-3 text-center text-2xl">
+          {plan.name}
         </h2>
         <span className="mb-4 text-[#b3b3b3]">Players: {plan.players}</span>
         <span className="mb-4 text-[#b3b3b3]">vCPUs: {plan.vCPUs}</span>
+        <span className="mb-4 text-[#b3b3b3]">RAM: {plan.ram}</span>
         <span className="mb-4 text-[#b3b3b3]">Storage: {plan.storage}</span>
         <span className="mb-4 text-[#b3b3b3]">Backups: {plan.numBackups}</span>
         <span className="mb-4 text-[#b3b3b3]">Ads: {plan.ads}</span>

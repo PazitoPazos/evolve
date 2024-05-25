@@ -1,6 +1,7 @@
 import { RowDataPacket } from 'mysql2'
 
 export interface Plan {
+  name: string
   ram: string
   players: string
   vCPUs: string
