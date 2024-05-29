@@ -286,7 +286,7 @@ function Pricing() {
         Pricing
       </h2>
       <div className="flex justify-center">
-        <div className="flex snap-x snap-mandatory justify-center gap-4 overflow-auto pt-4 sm:grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <div className="flex snap-x snap-mandatory gap-4 overflow-auto pt-4 sm:grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {plans.map((plan, index) => (
             <PlanCard key={index} plan={plan} />
           ))}
