@@ -1,5 +1,7 @@
 CREATE DATABASE `evolve` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
+USE `evolve`;
+
 	CREATE TABLE `servers` (
   		`id` varchar(36) COLLATE utf8mb4_spanish_ci NOT NULL,
   		`name` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL,
