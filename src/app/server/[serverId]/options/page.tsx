@@ -1,29 +1,24 @@
+'use client'
 import OptionCheckbox from '@/components/OptionCheckbox'
 import OptionNumber from '@/components/OptionNumber'
 import OptionSelect from '@/components/OptionSelect'
 import OptionText from '@/components/OptionText'
 import FileSettingsIcon from '@/icons/FileSettingsIcon'
+import { ServerConfig } from '@/types/types.d'
+import { useEffect, useState } from 'react'
 
 export default function Options() {
-  // const maxPlayersOptions = { optionId: 'max-players', optionDesc: 'Max Players', optionKey: 'max-players', optionValue: '20', minValue: '1', maxValue: '999' }
-  // const gamemodeOptions = { optionId: 'gamemode', optionDesc: 'Gamemode', optionKey: 'gamemode', optionValue: 'survival', selectOptions: [{ value: 'survival', label: 'Survival' }, { value: 'creative', label: 'Creative' }, { value: 'adventure', label: 'Adventure' }] }
-  // const difficultyOptions = { optionId: 'difficulty', optionDesc: 'Difficulty', optionKey: 'difficulty', optionValue: 'easy', selectOptions: [{ value: 'peaceful', label: 'Peaceful' }, { value: 'easy', label: 'Easy' }, { value: 'normal', label: 'Normal' }, { value: 'hard', label: 'Hard' }] }
-  // const hardcoreOptions = { optionId: 'hardcore', optionDesc: 'Hardcore', optionKey: 'hardcore', optionValue: 'false' }
-  // const whitelistOptions = { optionId: 'whitelist', optionDesc: 'Whitelist', optionKey: 'white-list', optionValue: 'false' }
-  // const onlineModeOptions = { optionId: 'online-mode', optionDesc: 'Cracked', optionKey: 'online-mode', optionValue: 'false' }
-  // const pvpOptions = { optionId: 'pvp', optionDesc: 'PVP', optionKey: 'pvp', optionValue: 'true' }
-  // const viewDistanceOptions = { optionId: 'view-distance', optionDesc: 'View Distance', optionKey: 'view-distance', optionValue: '10', minValue: '2', maxValue: '64' }
-  // const simulationDistanceOptions = { optionId: 'simulation-distance', optionDesc: 'Simulation Distance', optionKey: 'simulation-distance', optionValue: '8', minValue: '0', maxValue: '32' }
-  // const difficultyLockedOptions = { optionId: 'difficulty-locked', optionDesc: 'Difficulty Locked', optionKey: 'difficulty-locked', optionValue: 'false' }
-  // const commandsBlocksOptions = { optionId: 'command-blocks', optionDesc: 'Command Blocks', optionKey: 'command-blocks', optionValue: 'true' }
-  // const allowFlightOptions = { optionId: 'allow-flight', optionDesc: 'Allow Flight', optionKey: 'allow-flight', optionValue: 'false' }
-  // const spawnAnimalsOptions = { optionId: 'spawn-animals', optionDesc: 'Spawn Animals', optionKey: 'spawn-animals', optionValue: 'true' }
-  // const spawnNpcsOptions = { optionId: 'spawn-npcs', optionDesc: 'Spawn NPCs', optionKey: 'spawn-npcs', optionValue: 'true' }
-  // const allowNetherOptions = { optionId: 'allow-nether', optionDesc: 'Allow Nether', optionKey: 'allow-nether', optionValue: 'true' }
-  // const forceGamemodeOptions = { optionId: 'force-gamemode', optionDesc: 'Force Gamemode', optionKey: 'force-gamemode', optionValue: 'false' }
-  // const spawnProtectionOptions = { optionId: 'spawn-protection', optionDesc: 'Spawn Protection', optionKey: 'spawn-protection', optionValue: '16' }
-  // const requireResourcePacksOptions = { optionId: 'resource-packs', optionDesc: 'Resource Packs', optionKey: 'resource-packs', optionValue: 'false' }
-  // const resourcePackUrlOptions = { optionId: 'resource-pack-url', optionDesc: 'Resource Pack URL', optionKey: 'resource-pack-url', optionValue: '' }
+  const [config, setConfig] = useState<ServerConfig | null>(null)
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/config')
+      .then((res) => res.json())
+      .then((data) => {
+        setConfig(data)
+      })
+      .catch((err) => console.error('Error fetching config:', err))
+  }, [])
+
   return (
     <>
       <div className="w-2/3 overflow-auto pt-4 font-bold">
@@ -44,7 +39,7 @@ export default function Options() {
               optionId="max-players"
               optionDesc="Max Players"
               optionKey="max-players"
-              optionValue={20}
+              optionValue={parseInt(config?.['max-players'] || '20')}
               minValue={1}
               maxValue={999}
             />
@@ -52,7 +47,7 @@ export default function Options() {
               optionId="gamemode"
               optionDesc="Gamemode"
               optionKey="gamemode"
-              optionValue="survival"
+              optionValue={config?.['gamemode'] || 'survival'}
               selectOptions={[
                 { value: 'survival', label: 'Survival' },
                 { value: 'creative', label: 'Creative' },
@@ -64,7 +59,7 @@ export default function Options() {
               optionId="difficulty"
               optionDesc="Difficulty"
               optionKey="difficulty"
-              optionValue="easy"
+              optionValue={config?.['difficulty'] || 'easy'}
               selectOptions={[
                 { value: 'peaceful', label: 'Peaceful' },
                 { value: 'easy', label: 'Easy' },
@@ -76,31 +71,31 @@ export default function Options() {
               optionId="hardcore"
               optionDesc="Hardcore"
               optionKey="hardcore"
-              optionValue="false"
+              optionValue={config?.['hardcore'] || 'false'}
             />
             <OptionCheckbox
-              optionId="whitelist"
+              optionId="white-list"
               optionDesc="Whitelist"
               optionKey="white-list"
-              optionValue="false"
+              optionValue={config?.['white-list'] || 'false'}
             />
             <OptionCheckbox
               optionId="online-mode"
               optionDesc="Cracked"
               optionKey="online-mode"
-              optionValue="false"
+              optionValue={config?.['online-mode'] || 'false'}
             />
             <OptionCheckbox
               optionId="pvp"
               optionDesc="PVP"
               optionKey="pvp"
-              optionValue="true"
+              optionValue={config?.['pvp'] || 'true'}
             />
             <OptionNumber
               optionId="view-distance"
               optionDesc="View Distance"
               optionKey="view-distance"
-              optionValue={10}
+              optionValue={parseInt(config?.['view-distance'] || '10')}
               minValue={2}
               maxValue={64}
             />
@@ -108,7 +103,7 @@ export default function Options() {
               optionId="simulation-distance"
               optionDesc="Simulation Distance"
               optionKey="simulation-distance"
-              optionValue={10}
+              optionValue={parseInt(config?.['simulation-distance'] || '10')}
               minValue={2}
               maxValue={64}
             />
@@ -116,49 +111,49 @@ export default function Options() {
               optionId="commands-blocks"
               optionDesc="Commands Blocks"
               optionKey="commands-blocks"
-              optionValue="true"
+              optionValue={config?.['commands-blocks'] || 'true'}
             />
             <OptionCheckbox
               optionId="allow-flight"
               optionDesc="Allow Flight"
               optionKey="allow-flight"
-              optionValue="false"
+              optionValue={config?.['allow-flight'] || 'false'}
             />
             <OptionCheckbox
               optionId="spawn-animals"
               optionDesc="Spawn Animals"
               optionKey="spawn-animals"
-              optionValue="true"
+              optionValue={config?.['spawn-animals'] || 'true'}
             />
             <OptionCheckbox
               optionId="spawn-monsters"
               optionDesc="Spawn Monsters"
               optionKey="spawn-monsters"
-              optionValue="true"
+              optionValue={config?.['spawn-monsters'] || 'true'}
             />
             <OptionCheckbox
               optionId="spawn-npcs"
               optionDesc="Spawn NPCs"
               optionKey="spawn-npcs"
-              optionValue="true"
+              optionValue={config?.['spawn-npcs'] || 'true'}
             />
             <OptionCheckbox
               optionId="allow-nether"
               optionDesc="Allow Nether"
               optionKey="allow-nether"
-              optionValue="true"
+              optionValue={config?.['allow-nether'] || 'true'}
             />
             <OptionCheckbox
               optionId="force-gamemode"
               optionDesc="Force Gamemode"
               optionKey="force-gamemode"
-              optionValue="false"
+              optionValue={config?.['force-gamemode'] || 'false'}
             />
             <OptionNumber
               optionId="spawn-protection"
               optionDesc="Spawn Protection"
               optionKey="spawn-protection"
-              optionValue={16}
+              optionValue={parseInt(config?.['spawn-protection'] || '16')}
               minValue={0}
               maxValue={30000000}
             />
@@ -166,13 +161,13 @@ export default function Options() {
               optionId="require-resource-pack"
               optionDesc="Require Resource Pack"
               optionKey="require-resource-pack"
-              optionValue="false"
+              optionValue={config?.['require-resource-pack'] || 'false'}
             />
             <OptionText
               optionId="resource-pack"
               optionDesc="Resource Pack"
               optionKey="resource-pack"
-              optionValue=""
+              optionValue={config?.['resource-pack'] || ''}
             />
           </div>
         </div>

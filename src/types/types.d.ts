@@ -66,6 +66,28 @@ export interface SubscribeData {
   type: string
 }
 
+export type ServerConfig = {
+  'max-players': string
+  gamemode: string
+  difficulty: string
+  hardcore: string
+  'white-list': string
+  'online-mode': string
+  pvp: string
+  'view-distance': string
+  'simulation-distance': string
+  'commands-blocks': string
+  'allow-flight': string
+  'spawn-animals': string
+  'spawn-monsters': string
+  'spawn-npcs': string
+  'allow-nether': string
+  'force-gamemode': string
+  'spawn-protection': string
+  'require-resource-pack': string
+  'resource-pack': string
+}
+
 export function isServerItemData(obj: any): obj is ServerItemData
 
 export function isConsoleData(obj: any): obj is ConsoleData
