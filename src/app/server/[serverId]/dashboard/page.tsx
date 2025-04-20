@@ -59,7 +59,10 @@ export default function Dashboard() {
       setServerUsage(data)
     } else if (isConsoleData(webSocketData)) {
       const { data } = webSocketData
-      if (data.includes('Closing Server')) {
+      if (
+        data.includes('Closing Server') ||
+        data.includes('All dimensions are saved')
+      ) {
         setServerUsage(null)
         setStrokeColor('currentColor')
         setBorderColor('currentColor')
@@ -95,7 +98,7 @@ export default function Dashboard() {
 
       <StartStop />
 
-      <div className="grid justify-items-center gap-2 md:gap-8 text-sm md:grid-cols-2 md:text-lg">
+      <div className="grid justify-items-center gap-2 text-sm md:grid-cols-2 md:gap-8 md:text-lg">
         <div className="flex h-24 w-full items-center justify-between border-4 border-solid border-secondary-light px-2 text-[#b3b3b3] md:px-4">
           <div className="">
             <p>CPU Usage</p>
@@ -126,7 +129,7 @@ export default function Dashboard() {
             </svg>
           </div>
         </div>
-        <div className="flex h-20 md:h-24 w-full items-center justify-between border-4 border-solid border-secondary-light px-2 text-[#b3b3b3] md:px-4">
+        <div className="flex h-20 w-full items-center justify-between border-4 border-solid border-secondary-light px-2 text-[#b3b3b3] md:h-24 md:px-4">
           <div className="">
             <p>RAM Usage</p>
           </div>
@@ -137,7 +140,7 @@ export default function Dashboard() {
             >
               <p>
                 {serverUsage?.usedMem.toFixed(2) ?? 0}GB /{' '}
-                {serverUsage?.totalMem.toFixed(0) ?? 0}GB
+                {serverUsage?.totalMem.toFixed(2) ?? 0}GB
               </p>
             </div>
           </div>

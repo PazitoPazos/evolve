@@ -37,6 +37,7 @@ export const WebSocketDataProvider: React.FC<{ children: ReactNode }> = ({
 
     const handleMessage = (event: MessageEvent) => {
       const message = JSON.parse(event.data)
+      console.log(event.data)
       // Actualiza los datos según el tipo de mensaje
       if (isServerUsageData(message) || isConsoleData(message)) {
         setWebSocketData(message)

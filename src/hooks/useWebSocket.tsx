@@ -21,7 +21,7 @@ export const WebSocketProvider: React.FC<{ children: ReactNode }> = ({
   const [ws, setWs] = useState<WebSocket | null>(null)
 
   useEffect(() => {
-    const newWs = new WebSocket('ws://localhost:4000')
+    const newWs = new WebSocket('ws://192.168.1.70:4000')
 
     newWs.onopen = () => {
       console.log('Evolve API conectada')

@@ -1,4 +1,9 @@
-import { ServerUsageDetails, ServerUsageData, ConsoleData, ServerItemData } from './types.d'
+import {
+  ServerUsageDetails,
+  ServerUsageData,
+  ConsoleData,
+  ServerItemData,
+} from './types.d'
 
 export function isServerItemData(obj: any): obj is ServerItemData {
   return (

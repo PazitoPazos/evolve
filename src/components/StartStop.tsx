@@ -14,9 +14,13 @@ function StartStop() {
 
     if (isConsoleData(webSocketData)) {
       const { data } = webSocketData
-      if (data.includes('Timings Reset')) {
+      
+      if (data.includes('Timings Reset') || data.includes('Time elapsed')) {
         setServerStatus('running')
-      } else if (data.includes('Closing Server')) {
+      } else if (
+        data.includes('Closing Server') ||
+        data.includes('All dimensions are saved')
+      ) {
         setServerStatus('offline')
       }
     } else if (isServerUsageData(webSocketData)) {

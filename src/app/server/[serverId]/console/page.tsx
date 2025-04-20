@@ -11,7 +11,7 @@ export default function Console() {
   const { webSocketData, wsSendData } = useWebSocketData()
   const { ws } = useWebSocket()
 
-  const lineRegex = /^\[\d{2}:\d{2}:\d{2} [A-Z]*\]/
+  const lineRegex = /^\[\d{2}:\d{2}:\d{2} *\]/
 
   useEffect(() => {
     // TODO: Make a interval for reconnect if ws is disconnected
@@ -44,7 +44,10 @@ export default function Console() {
       if (lineRegex.test(data)) {
         const lines = data.split('\n').filter((line) => line.trim() !== '')
         setConsoleLines((prevLines) => [...(prevLines ?? []), ...lines])
-      } else if (data.includes('Closing Server')) {
+      } else if (
+        data.includes('Closing Server') ||
+        data.includes('All dimensions are saved')
+      ) {
         setConsoleLines(null)
       }
     } else {
